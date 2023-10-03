@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[红茶]]></title>
+  <title><![CDATA[📙红茶的博客]]></title>
   <link href="redtea.top/atom.xml" rel="self"/>
   <link href="redtea.top/"/>
-  <updated>2023-10-03T23:06:14+08:00</updated>
+  <updated>2023-10-04T01:44:01+08:00</updated>
   <id>redtea.top/</id>
   <author>
     <name><![CDATA[]]></name>
@@ -25,12 +25,55 @@
 <ol>
 <li>域名，提前购买好一个域名，大概的价格也就在10元年就能搞定，可分为国内和国外的域名。国内一般需要进行备案，整体所需时间大概在1个月左右。</li>
 <li>GitHub账号，可以百度GitHub，注册一个账号备用。</li>
-<li>静态站点生成器，比如hugo, hexo，Jekyll等，通过这个生成的内容，上传到GitHub中，进行访问。</li>
+<li>静态站点生成器，比如hugo, hexo，Jekyll等，通过这个生成的内容，上传到GitHub中，进行访问。本次选用Mac版本的mweb pro，这是一个可以写md文件和发布功能的软件。</li>
 </ol>
 <h3><a id="github%E4%BB%93%E5%BA%93%E8%AE%BE%E7%BD%AE" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>GitHub仓库设置</h3>
 <ol>
-<li>GitHub主要的作用</li>
+<li>
+<p>GitHub主要作用，一是作为一个网站资源页面的存储仓库，二是利GitHub自带的GitHub pages发布自己的网站。</p>
+</li>
+<li>
+<p>新建仓库，设置为public类型，仓库名字一定是 XXX.github.io，xxx是你自己定义的名字，可以随便命名。</p>
+</li>
+<li>
+<p>仓库建好后，点击<code>settings</code>,找到 <code>pages</code> , 对网站进行设置。source中选择资源来自于网页代码的分支，branch选择对应的分支，文件夹选择默认就好，custom domain中填写上自己的网站域名，dns解析通过后，会显示绿色的<code>DNS check successful</code>。<br />
+<img src="media/16963537816256/16963561739038.jpg" alt="" /></p>
+</li>
+<li>
+<p>在设置好后，上传代码会自动进行部署，将代码部署到自己的网站上。</p>
+</li>
 </ol>
+<h3><a id="%E5%9F%9F%E5%90%8D%E8%AE%BE%E7%BD%AE" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>域名设置</h3>
+<p>在购买域名后，还需要有几个设置，才能保证能正常访问到网页。</p>
+<ol>
+<li>GitHub设置dns解析。打开域名购买商或者代理商的网站，把GitHub的几个地址解析添加上去。</li>
+</ol>
+<pre class="line-numbers"><code class="language-plain_text">185.199.108.153
+185.199.109.153
+185.199.110.153
+185.199.111.153
+</code></pre>
+<ol start="2">
+<li>
+<p>设置指向GitHub页面的dns代理。添加解析记录，类型选择cname，名称选择www ,内容就是自己在GitHub设置的仓库名字。<br />
+<img src="media/16963537816256/16963567820685.jpg" alt="" /></p>
+</li>
+<li>
+<p>验证是否有绑定成功，使用命令 <code>dig 自己域名</code>，可以看到解析后的域名地址。</p>
+</li>
+</ol>
+<h3><a id="mweb-pro%E7%9A%84%E8%AE%BE%E7%BD%AE" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>mweb pro的设置</h3>
+<p>前面的几部分设置好了，剩下的就是网页页面的编写，可以按照以下的步骤进行设置。<br />
+<img src="media/16963537816256/16963575233471.jpg" alt="" /></p>
+<ol>
+<li>在第一步中添加一个静态网站分类，然后进行设置。</li>
+<li>填写好名称，选择想要的模版，有好几个模版选择，可以一一尝试找到自己的风格。</li>
+<li>网站名称，填写属于自己的博客名字。</li>
+<li>网站地址就是自己的网址。</li>
+<li>设置好后，选择清理并重新生成网站，就能得到新的网站页面</li>
+<li>选择上传GitHub后，等代GitHub的自动化部署完成，就能直接访问了。</li>
+</ol>
+<p>在构建的过程中，会遇到各种错误，可以根据这些错误去搜索解决办法解决，当真的网站搭建成功后，整个人都是快乐的。</p>
 
 ]]></content>
   </entry>
