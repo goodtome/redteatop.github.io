@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>
     
-  结合mwebpro和GitHub pages的网站发布流程 - 📙红茶的博客
+  开发技术 - 📙红茶的博客
   
   </title>
   
@@ -91,126 +91,84 @@
        
 
  <script type="text/javascript">
-  $(function(){
-    $('#menu_item_index').addClass('is_active');
-  });
+	$(function(){
+		$('#menu_item_index').addClass('is_active');
+	});
 </script>
 <div class="row">
-  <div class="large-8 medium-8 columns">
-      <div class="markdown-body article-wrap">
-       <div class="article">
-          
-          <h1>结合mwebpro和GitHub pages的网站发布流程</h1>
-     
-        <div class="read-more clearfix">
-          <span class="date">2023/10/04</span>
-
-          <span>posted in&nbsp;</span> 
-          
-              <span class="posted-in"><a href='%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8.html'>工具使用</a></span>
-           
-         
-          <span class="comments">
-            
-
-            
-          </span>
-
-        </div>
-      </div><!-- article -->
-
-      <div class="article-content">
-      <p>在实际中有这样的几个需求，能基于一个域名快速的搭建属于自己的网站，有自己的博客。<br />
-最近正好在研究，如何搭建属于自己的一个博客系统，用经济快捷的方式搭建一个属于自己的博客。</p>
-<h3><a id="%E7%BD%91%E7%AB%99%E5%87%86%E5%A4%87" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>网站准备</h3>
-<p>在搭建之前，是需要有几个东西提前准备的。</p>
-<ol>
-<li>域名，提前购买好一个域名，大概的价格也就在10元年就能搞定，可分为国内和国外的域名。国内一般需要进行备案，整体所需时间大概在1个月左右。</li>
-<li>GitHub账号，可以百度GitHub，注册一个账号备用。</li>
-<li>静态站点生成器，比如hugo, hexo，Jekyll等，通过这个生成的内容，上传到GitHub中，进行访问。本次选用Mac版本的mweb pro，这是一个可以写md文件和发布功能的软件。</li>
-</ol>
-<h3><a id="github%E4%BB%93%E5%BA%93%E8%AE%BE%E7%BD%AE" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>GitHub仓库设置</h3>
-<ol>
-<li>
-<p>GitHub主要作用，一是作为一个网站资源页面的存储仓库，二是利GitHub自带的GitHub pages发布自己的网站。</p>
-</li>
-<li>
-<p>新建仓库，设置为public类型，仓库名字一定是 XXX.github.io，xxx是你自己定义的名字，可以随便命名。</p>
-</li>
-<li>
-<p>仓库建好后，点击<code>settings</code>,找到 <code>pages</code> , 对网站进行设置。source中选择资源来自于网页代码的分支，branch选择对应的分支，文件夹选择默认就好，custom domain中填写上自己的网站域名，dns解析通过后，会显示绿色的<code>DNS check successful</code>。<br />
-<img src="media/16963537816256/16963561739038.jpg" alt="" /></p>
-</li>
-<li>
-<p>在设置好后，上传代码会自动进行部署，将代码部署到自己的网站上。</p>
-</li>
-</ol>
-<h3><a id="%E5%9F%9F%E5%90%8D%E8%AE%BE%E7%BD%AE" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>域名设置</h3>
-<p>在购买域名后，还需要有几个设置，才能保证能正常访问到网页。</p>
-<ol>
-<li>GitHub设置dns解析。打开域名购买商或者代理商的网站，把GitHub的几个地址解析添加上去。</li>
-</ol>
-<pre class="line-numbers"><code class="language-plain_text">185.199.108.153
-185.199.109.153
-185.199.110.153
-185.199.111.153
+	<div class="large-8 medium-8 columns">
+		<div class="markdown-body home-categories">
+		
+			<div class="article">
+                <a class="clearlink" href="16964281020029.html">
+                
+                  <h1>基于node.js 和hexo框架搭建博客系统</h1>
+                  <div class="a-content">
+                      
+                      <div class="a-content-text">
+                        
+                        	<p>在搭建系统的部分中，也有一种比较简单的方式去搭建属于自己的博客系统。具体实现部分的如下，使用命令。</p>
+<p>1、下载node的框架，用于做为博客系统的基础<br />
+<code>npm install node.js </code></p>
+<p>2、切换下载源，使用指向淘宝镜像</p>
+<pre class="line-numbers"><code class="language-linux">npm install -g cnpm --registry=http://registry.npm.taobao.org```
 </code></pre>
-<ol start="2">
-<li>
-<p>设置指向GitHub页面的dns代理。添加解析记录，类型选择cname，名称选择www ,内容就是自己在GitHub设置的仓库名字。<br />
-<img src="media/16963537816256/16963567820685.jpg" alt="" /></p>
-</li>
-<li>
-<p>验证是否有绑定成功，使用命令 <code>dig 自己域名</code>，可以看到解析后的域名地址。</p>
-</li>
-</ol>
-<h3><a id="mweb-pro%E7%9A%84%E8%AE%BE%E7%BD%AE" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>mweb pro的设置</h3>
-<p>前面的几部分设置好了，剩下的就是网页页面的编写，可以按照以下的步骤进行设置。<br />
-<img src="media/16963537816256/16963575233471.jpg" alt="" /></p>
-<ol>
-<li>在第一步中添加一个静态网站分类，然后进行设置。</li>
-<li>填写好名称，选择想要的模版，有好几个模版选择，可以一一尝试找到自己的风格。</li>
-<li>网站名称，填写属于自己的博客名字。</li>
-<li>网站地址就是自己的网址。</li>
-<li>设置好后，选择清理并重新生成网站，就能得到新的网站页面</li>
-<li>选择上传GitHub后，等代GitHub的自动化部署完成，就能直接访问了。</li>
-</ol>
-<p>在构建的过程中，会遇到各种错误，可以根据这些错误去搜索解决办法解决，当真的网站搭建成功后，整个人都是快乐的。</p>
+<p>3、下载博客框架hexo</p>
+<pre class="line-numbers"><code class="language-plain_text">cnpm install -g hexo-cli
+</code></pre>
+<p>4、建博客的文件路径<br />
+/Users/tom 目录下 使用命令 <code>mkdir blog</code></p>
+<p>5、进入文件夹目录下安装博客框架<br />
+<code>cd blog </code> 进入博客，使用命令<code>sudo hexo init</code>,就能实现下载完成,命令<code>ls -la </code>可以查看下载的内容<br />
+<img src="https://raw.githubusercontent.com/goodtome/Picture-warehouse/master/%E5%85%AC%E4%BC%97%E5%8F%B7%E5%B9%B3%E5%8F%B0/202208192250042-blog-%E4%B8%8B%E8%BD%BD%E6%A1%86%E6%9E%B6.png" alt="" /></p>
+<p>6、在根目录下启动博客<br />
+使用命令<code> sudo hexo s</code>，就能启动博客。本地访问地址是<code>http://localhost:4000/</code> ，占用本地的端口号是4000，如果想改端口号，使用命令<code>sudo hexo s -p 5555</code></p>
+<p>7、hexo官网的命令<br />
+在官网中使用的命令有，创建博客<code>hexo new &quot;My New Post&quot;</code> ，启动命令<code>hexo server</code>  ，配置文件更新<code>hexo generate</code> ，远程部署<code>hexo deploy</code><br />
+回到命令行按住Ctrl+C退出。所有文章均以.md格式保存在<code>/source/_posts</code>我们可以在此目录下删除或添加文章。</p>
+
+                        
+                      </div>
+                  </div>
+                </a>
+                <div class="read-more clearfix">
+                  <div class="more-left left">
+                  
+                    <span class="date">2023/10/04</span>
+                    <span>posted in&nbsp;</span> 
+          				  
+          					    <span class="posted-in"><a href='%E5%BC%80%E5%8F%91%E6%8A%80%E6%9C%AF.html'>开发技术</a></span>
+          				   
+                    
+
+                  </div>
+                  <div class="more-right right">
+                  <span class="comments">
+                      
+
+                       
+                  </span>
+                  </div>
+                </div>
+              </div><!-- article -->
+        
+              
 
 
-    
-
-      </div>
-
-      <div class="row">
-        <div class="large-6 columns">
-        <p class="text-left" style="padding:15px 0px;">
-      
-          <a href="16964281020029.html" 
-          title="Previous Post: 基于node.js 和hexo框架搭建博客系统">&laquo; 基于node.js 和hexo框架搭建博客系统</a>
-      
-        </p>
-        </div>
-        <div class="large-6 columns">
-      <p class="text-right" style="padding:15px 0px;">
-      
-      </p>
-        </div>
-      </div>
-      <div class="comments-wrap">
-        <div class="share-comments">
-          
-
-          
-
-          
-        </div>
-      </div>
-    </div><!-- article-wrap -->
-  </div><!-- large 8 -->
-
-
-
+			<div class="row">
+			  <div class="large-6 columns">
+			  <p class="text-left" style="padding-top:25px;">
+			   
+			  </p>
+			  </div>
+			  <div class="large-6 columns">
+			<p class="text-right" style="padding-top:25px;">
+			
+			</p>
+			  </div>
+			</div>
+		</div>
+	</div><!-- large 8 -->
 
  <div class="large-4 medium-4 columns">
   <div class="hide-for-small">
@@ -298,9 +256,6 @@ Theme used <a target="_blank" href="http://github.com">GitHub CSS</a>.</p>
 
 
 
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-<script type="text/x-mathjax-config">MathJax.Hub.Config({TeX: { equationNumbers: { autoNumber: "AMS" } }});</script>
-
   
 
 
@@ -314,8 +269,6 @@ Theme used <a target="_blank" href="http://github.com">GitHub CSS</a>.</p>
 
 
 
-
-<script src="asset/prism.js"></script>
 
 
 <style type="text/css">
