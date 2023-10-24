@@ -1,0 +1,519 @@
+<!doctype html>
+<html class="no-js" lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+    
+  TypeScript的严格语法限制解决方案 - 📙红茶的博客
+  
+  </title>
+  
+  
+  <link href="atom.xml" rel="alternate" title="📙红茶的博客" type="application/atom+xml">
+    <link rel="stylesheet" href="asset/css/foundation.min.css" />
+    <link rel="stylesheet" href="asset/css/docs.css" />
+    <script src="asset/js/vendor/modernizr.js"></script>
+    <script src="asset/js/vendor/jquery.js"></script>
+ 
+<script type="text/javascript">
+  function before_search(){
+    var searchVal = 'site:redtea.top ' + document.getElementById('search_input').value;
+    document.getElementById('search_q').value = searchVal;
+    return true;
+  }
+</script>
+  </head>
+  <body class="antialiased hide-extras">
+    
+    <div class="marketing off-canvas-wrap" data-offcanvas>
+      <div class="inner-wrap">
+
+
+<nav class="top-bar docs-bar hide-for-small" data-topbar>
+
+
+  <section class="top-bar-section">
+  <div class="row">
+      <div style="position: relative;width:100%;"><div style="position: absolute; width:100%;">
+        <ul id="main-menu" class="left">
+        
+        <li id=""><a target="_self" href="index.html">Home</a></li>
+        
+        <li id=""><a target="_self" href="archives.html">Archives</a></li>
+        
+        </ul>
+
+        <ul class="right" id="search-wrap">
+          <li>
+<form target="_blank" onsubmit="return before_search();" action="https://google.com/search" method="get">
+    <input type="hidden" id="search_q" name="q" value="" />
+    <input tabindex="1" type="search" id="search_input"  placeholder="Search"/>
+</form>
+</li>
+          </ul>
+      </div></div>
+  </div>
+  </section>
+
+</nav>
+
+        <nav class="tab-bar show-for-small">
+  <a href="javascript:void(0)" class="left-off-canvas-toggle menu-icon">
+    <span> &nbsp; 📙红茶的博客</span>
+  </a>
+</nav>
+
+<aside class="left-off-canvas-menu">
+      <ul class="off-canvas-list">
+        
+        <li><a target="_self" href="index.html">Home</a></li>
+        
+        <li><a target="_self" href="archives.html">Archives</a></li>
+        
+
+    <li><label>Categories</label></li>
+
+        
+            <li><a href="%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8.html">工具使用</a></li>
+        
+            <li><a href="%E5%BC%80%E5%8F%91%E6%8A%80%E6%9C%AF.html">开发技术</a></li>
+        
+            <li><a href="%E6%99%93%E9%A3%8E%E6%97%A5%E8%AE%B0.html">晓风日记</a></li>
+         
+
+      </ul>
+    </aside>
+
+<a class="exit-off-canvas" href="#"></a>
+
+
+        <section id="main-content" role="main" class="scroll-container">
+        
+       
+
+ <script type="text/javascript">
+  $(function(){
+    $('#menu_item_index').addClass('is_active');
+  });
+</script>
+<div class="row">
+  <div class="large-8 medium-8 columns">
+      <div class="markdown-body article-wrap">
+       <div class="article">
+          
+          <h1>TypeScript的严格语法限制解决方案</h1>
+     
+        <div class="read-more clearfix">
+          <span class="date">2023/10/22</span>
+
+          <span>posted in&nbsp;</span> 
+          
+              <span class="posted-in"><a href='%E5%BC%80%E5%8F%91%E6%8A%80%E6%9C%AF.html'>开发技术</a></span>
+           
+         
+          <span class="comments">
+            
+
+            
+          </span>
+
+        </div>
+      </div><!-- article -->
+
+      <div class="article-content">
+      <p>在进行vue的开发中，在写ts文件时候，遇到有这么一个报错。经过查阅资料和实际进行解决，问题就是出现在了这个语法的严格造成的。</p>
+<h2><a id="1%E6%8A%A5%E9%94%99" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>1 报错</h2>
+<p>具体报错信息如下:<br />
+<img src="http://image.redtea.top//imagevue%E7%B3%BB%E5%88%97_ts%E8%AF%AD%E6%B3%95%E4%B8%A5%E6%A0%BC%E6%A8%A1%E5%BC%8F%E6%8A%A5%E9%94%99_20231024171652.png?e=9000000000&amp;token=_pgcTSP3oIupXCcKpdZYLsvKfaaNPV-1PBxNOtDy:0fLhfo1v8bhB3Jx4noi1L9MZQ4s=" alt="image.png" /></p>
+<h2><a id="2%E7%BC%98%E7%94%B1" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>2 缘由</h2>
+<p>更严格的类属性检查<br />
+TypeScript 2.7引入了一个新的控制严格性的标记 <code>--strictPropertyInitialization</code></p>
+<p>使用这个标记会确保类的每个实例属性都会在构造函数里或使用属性初始化器赋值。 在某种意义上，它会明确地进行从变量到类的实例属性的赋值检查</p>
+<h2><a id="3%E8%A7%A3%E5%86%B3%E5%8A%9E%E6%B3%95" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>3 解决办法</h2>
+<p>找到文件中的tsconfig.json配置文件，增加或者修改配置  将严格初始初始化属性去掉<br />
+<code>  &quot;strictPropertyInitialization&quot;: false,</code></p>
+<p><img src="http://image.redtea.top//imagevue%E7%B3%BB%E5%88%97_vueTS%E4%B8%A5%E6%A0%BC%E8%AF%AD%E6%B3%95_20231024171420.png?e=9000000000&amp;token=_pgcTSP3oIupXCcKpdZYLsvKfaaNPV-1PBxNOtDy:jrrUiF8qqMMpyVDi1qvLL1x27Gw=" alt="image.png" /></p>
+<p>参考链接 ：</p>
+<ul>
+<li><a href="https://juejin.cn/post/7068542157967065119">探索TypeScript中的高级编译器选项 - 掘金</a></li>
+<li><a href="https://www.tslang.cn/docs/release-notes/typescript-2.7.html">TypeScript 2.7 · TypeScript中文网 · TypeScript——JavaScript的超集</a></li>
+</ul>
+<p>本文作者：redtea 红茶的博客<br />
+本文链接：<a href="https://redtea.top/16964281020029.html">https://redtea.top/16964281020029.html</a><br />
+版权声明：本文采用 知识共享署名-非商业性使用-相同方式共享 4.0 国际许可协议 进行许可，非商业转载及引用请注明出处（作者、原文链接），商业转载请联系作者获得授权。</p>
+<p><img src="media/16979440824598/%E6%89%AB%E7%A0%81_%E6%90%9C%E7%B4%A2%E8%81%94%E5%90%88%E4%BC%A0%E6%92%AD%E6%A0%B7%E5%BC%8F-%E6%A0%87%E5%87%86%E8%89%B2%E7%89%88.png" alt="扫码_搜索联合传播样式-标准色版" /></p>
+
+
+    
+
+      </div>
+
+      <div class="row">
+        <div class="large-6 columns">
+        <p class="text-left" style="padding:15px 0px;">
+      
+        </p>
+        </div>
+        <div class="large-6 columns">
+      <p class="text-right" style="padding:15px 0px;">
+      
+          <a  href="16977289191724.html" 
+          title="Next Post: obsidan官方同步的实际操作方案">obsidan官方同步的实际操作方案 &raquo;</a>
+      
+      </p>
+        </div>
+      </div>
+      <div class="comments-wrap">
+        <div class="share-comments">
+          
+
+          
+
+          
+        </div>
+      </div>
+    </div><!-- article-wrap -->
+  </div><!-- large 8 -->
+
+
+
+
+ <div class="large-4 medium-4 columns">
+  <div class="hide-for-small">
+    <div id="sidebar" class="sidebar">
+          <div id="site-info" class="site-info">
+            
+                <h1>📙红茶的博客</h1>
+                <div class="site-des"></div>
+                <div class="social">
+
+
+
+
+
+
+
+
+
+
+
+  <a target="_blank" class="rss" href="atom.xml" title="RSS">RSS</a>
+                
+              	 </div>
+          	</div>
+
+             
+
+              <div id="site-categories" class="side-item ">
+                <div class="side-header">
+                  <h2>Categories</h2>
+                </div>
+                <div class="side-content">
+
+      	<p class="cat-list">
+        
+            <a href="%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8.html"><strong>工具使用</strong></a>
+        
+            <a href="%E5%BC%80%E5%8F%91%E6%8A%80%E6%9C%AF.html"><strong>开发技术</strong></a>
+        
+            <a href="%E6%99%93%E9%A3%8E%E6%97%A5%E8%AE%B0.html"><strong>晓风日记</strong></a>
+         
+        </p>
+
+
+                </div>
+              </div>
+
+              <div id="site-categories" class="side-item">
+                <div class="side-header">
+                  <h2>Recent Posts</h2>
+                </div>
+                <div class="side-content">
+                <ul class="posts-list">
+	      
+		      
+			      <li class="post">
+			        <a href="16979440824598.html">TypeScript的严格语法限制解决方案</a>
+			      </li>
+		     
+		  
+		      
+			      <li class="post">
+			        <a href="16977289191724.html">obsidan官方同步的实际操作方案</a>
+			      </li>
+		     
+		  
+		      
+			      <li class="post">
+			        <a href="16974682314904.html">智慧的指引：三则经典语录与个人进步之道</a>
+			      </li>
+		     
+		  
+		      
+			      <li class="post">
+			        <a href="16964281020029.html">基于node.js 和hexo框架搭建博客系统</a>
+			      </li>
+		     
+		  
+		      
+			      <li class="post">
+			        <a href="16963537816256.html">结合mwebpro和GitHub pages的网站发布流程</a>
+			      </li>
+		     
+		   
+		  		</ul>
+                </div>
+              </div>
+        </div><!-- sidebar -->
+      </div><!-- hide for small -->
+</div><!-- large 4 -->
+
+</div><!-- row -->
+
+ <div class="page-bottom clearfix">
+  <div class="row">
+   <p class="copyright">Copyright &copy; 2015
+Powered by <a target="_blank" href="http://www.mweb.im">MWeb</a>,&nbsp; 
+Theme used <a target="_blank" href="http://github.com">GitHub CSS</a>.</p>
+  </div>
+</div>
+
+        </section>
+      </div>
+    </div>
+
+
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script type="text/x-mathjax-config">MathJax.Hub.Config({TeX: { equationNumbers: { autoNumber: "AMS" } }});</script>
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+figure{margin: 0;padding: 0;}
+figcaption{text-align:center;}
+
+/* PrismJS 1.14.0
+ http://prismjs.com/download.html#themes=prism&languages=markup+css+clike+javascript */
+/**
+ * prism.js default theme for JavaScript, CSS and HTML
+ * Based on dabblet (http://dabblet.com)
+ * @author Lea Verou
+ */
+
+code[class*="language-"],
+pre[class*="language-"] {
+    color: black;
+    background: none;
+    text-shadow: 0 1px white;
+    font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+    text-align: left;
+    white-space: pre;
+    word-spacing: normal;
+    word-break: normal;
+    word-wrap: normal;
+    line-height: 1.5;
+    
+    -moz-tab-size: 4;
+    -o-tab-size: 4;
+    tab-size: 4;
+    
+    -webkit-hyphens: none;
+    -moz-hyphens: none;
+    -ms-hyphens: none;
+    hyphens: none;
+}
+
+pre[class*="language-"]::-moz-selection, pre[class*="language-"] ::-moz-selection,
+code[class*="language-"]::-moz-selection, code[class*="language-"] ::-moz-selection {
+    text-shadow: none;
+    background:#b3d4fc;
+}
+
+pre[class*="language-"]::selection, pre[class*="language-"] ::selection,
+code[class*="language-"]::selection, code[class*="language-"] ::selection {
+    text-shadow: none;
+    background: #b3d4fc;
+}
+
+@media print {
+    code[class*="language-"],
+    pre[class*="language-"] {
+        text-shadow: none;
+    }
+}
+
+/* Code blocks */
+pre[class*="language-"] {
+    padding: 1em;
+    margin: .5em 0;
+    overflow: auto;
+}
+
+:not(pre) > code[class*="language-"],
+pre[class*="language-"] {
+    background: #F7F7F7;
+}
+
+/* Inline code */
+:not(pre) > code[class*="language-"] {
+    padding: .1em;
+    border-radius: .3em;
+    white-space: normal;
+}
+
+.token.comment,
+.token.prolog,
+.token.doctype,
+.token.cdata {
+    color: slategray;
+}
+
+.token.punctuation {
+    color: #999;
+}
+
+.namespace {
+    opacity: .7;
+}
+
+.token.property,
+.token.tag,
+.token.boolean,
+.token.number,
+.token.constant,
+.token.symbol,
+.token.deleted {
+    color: #905;
+}
+
+.token.selector,
+.token.attr-name,
+.token.string,
+.token.char,
+.token.builtin,
+.token.inserted {
+    color: #690;
+}
+
+.token.operator,
+.token.entity,
+.token.url,
+.language-css .token.string,
+.style .token.string {
+    color: #9a6e3a;
+    background: hsla(0, 0%, 100%, .5);
+}
+
+.token.atrule,
+.token.attr-value,
+.token.keyword {
+    color: #07a;
+}
+
+.token.function,
+.token.class-name {
+    color: #DD4A68;
+}
+
+.token.regex,
+.token.important,
+.token.variable {
+    color: #e90;
+}
+
+.token.important,
+.token.bold {
+    font-weight: bold;
+}
+.token.italic {
+    font-style: italic;
+}
+
+.token.entity {
+    cursor: help;
+}
+
+
+pre[class*="language-"].line-numbers {
+    position: relative;
+    padding-left: 3.8em;
+    counter-reset: linenumber;
+}
+
+pre[class*="language-"].line-numbers > code {
+    position: relative;
+    white-space: inherit;
+}
+
+.line-numbers .line-numbers-rows {
+    position: absolute;
+    pointer-events: none;
+    top: 0;
+    font-size: 100%;
+    left: -3.8em;
+    width: 3em; /* works for line-numbers below 1000 lines */
+    letter-spacing: -1px;
+    border-right: 1px solid #999;
+
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+
+}
+
+    .line-numbers-rows > span {
+        pointer-events: none;
+        display: block;
+        counter-increment: linenumber;
+    }
+
+        .line-numbers-rows > span:before {
+            content: counter(linenumber);
+            color: #999;
+            display: block;
+            padding-right: 0.8em;
+            text-align: right;
+        }
+
+</style>
+
+  
+    
+
+    <script src="asset/js/foundation.min.js"></script>
+    <script>
+      $(document).foundation();
+      function fixSidebarHeight(){
+        var w1 = $('.markdown-body').height();
+          var w2 = $('#sidebar').height();
+          if (w1 > w2) { $('#sidebar').height(w1); };
+      }
+      $(function(){
+        fixSidebarHeight();
+      })
+      $(window).load(function(){
+          fixSidebarHeight();
+      });
+     
+    </script>
+
+
+
+  </body>
+</html>
