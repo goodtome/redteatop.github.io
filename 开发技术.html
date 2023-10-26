@@ -102,6 +102,134 @@
 		<div class="markdown-body home-categories">
 		
 			<div class="article">
+                <a class="clearlink" href="ji-shu-bo-ke-mo-banzui-jin-zai.html">
+                
+                  <h1>nginx报错413的解决流程</h1>
+                  <div class="a-content">
+                      
+                      <div class="a-content-text">
+                        
+                        	<p>最近在处理项目问题的时候，遇到了有这么一个有趣的问题，不像其他的报错401、502、500 等，这直接报错了413，这在开发中是常见有不常见的一个状态码，代表着这在使用中有nginx上的问题。</p>
+<h2><a id="1-nginx%E6%8A%A5%E9%94%99413" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>1 nginx报错413</h2>
+<h3><a id="1-1%E9%97%AE%E9%A2%98%E6%98%BE%E7%A4%BA%EF%BC%9A" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>1.1 问题显示：</h3>
+<p>nginx 出现413 Request Entity Too Large<br />
+界面中添加了对应的图纸数据，点击保存，调用更新接口，数据中数据实体过多<br />
+<img src="http://image.redtea.top//imagejava%E5%BC%80%E5%8F%91_nginx%E6%8A%80%E6%9C%AF_%E5%AE%9E%E4%BD%93%E8%BF%87%E5%A4%A7%E9%85%8D%E7%BD%AE%E4%BF%AE%E6%94%B9.png?e=9000000000&amp;token=_pgcTSP3oIupXCcKpdZYLsvKfaaNPV-1PBxNOtDy:hH9V8U9F8Y7L0zcNWjvQ5eYBpq8=" alt="1884d3ce4eabbf13b4476395fb4e469.png" /></p>
+<h3><a id="1-2%E9%97%AE%E9%A2%98%E6%8E%92%E6%9F%A5" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>1.2 问题排查</h3>
+<ul>
+<li>在网页出现错误的时候，首先就是查看请求日志，做问题复现</li>
+<li>查询运行日志</li>
+</ul>
+<h3><a id="1-3%E5%8E%9F%E5%9B%A0" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>1.3 原因</h3>
+<p>nginx在做代理时候，对实际的数据转发有默认的限制，限制大小为1mb，这个可以在配置文件中进行修改</p>
+<h3><a id="1-4%E8%A7%A3%E5%86%B3%E5%8A%9E%E6%B3%95" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>1.4 解决办法</h3>
+<ul>
+<li>找到nginx配置文件 一般默认的路径是在<code>/etc/nginx/nginx.conf</code></li>
+<li>使用vi或者vim命令打开文件进行修改 ，英文模式下，按住i键进入编辑模式</li>
+<li>找到其中的http{}模块，模块中添加<code>client_max_body_size 20m;</code> ,数字可以根据实际情况自定义，esc退出编辑，<code>:wq</code> ，退出保存数据</li>
+<li>重启nginx ,<code>sudo systemctl restart  nginx</code></li>
+</ul>
+<h3><a id="1-5%E9%99%84%E5%BD%95" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>1.5 附录</h3>
+<p>pgsql中查询数据大小：</p>
+<pre class="line-numbers"><code class="language-sql">SELECT id, DATA-&gt;&gt;'name' AS filename , length(DATA::TEXT)/ 1024 AS leMB
+FROM tablename
+WHERE username= 'admin'
+ORDER BY leMB DESC ;
+</code></pre>
+<p>修改参数：<br />
+<img src="http://image.redtea.top//imagejava%E5%BC%80%E5%8F%91_nginx%E6%8A%80%E6%9C%AF_%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E5%A4%A7%E5%B0%8F%E9%99%90%E5%88%B6%E4%BF%AE%E6%94%B9.png?e=9000000000&amp;token=_pgcTSP3oIupXCcKpdZYLsvKfaaNPV-1PBxNOtDy:94lRP8TcZGLTx9Tl9PaStsjmt-s=" alt="5214bac6584a3c894e8bacd41344f0f.png" /></p>
+<h3><a id="%E7%BB%93%E8%AF%AD" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>结语</h3>
+<p>在遇到问题的时候，不着急，先看看报错日志，确定问题的位置，更好的能解决问题。</p>
+<blockquote>
+<p>[!emoji] 欢迎扫码查看更多我的文章</p>
+</blockquote>
+<p><img src="http://image.redtea.top//imageredtea_%E7%BD%91%E7%AB%99%E4%BA%8C%E7%BB%B4%E7%A0%81.png?e=9000000000&amp;token=_pgcTSP3oIupXCcKpdZYLsvKfaaNPV-1PBxNOtDy:8lvuOLe8ONYi6D1EAkyIkAQzyNQ=" alt="" /></p>
+<p>本文作者：redtea 红茶的博客<br />
+本文链接：<a href="https://redtea.top">https://redtea.top</a><br />
+版权声明：本文采用 知识共享署名-非商业性使用-相同方式共享 4.0 国际许可协议 进行许可，非商业转载及引用请注明出处（作者、原文链接），商业转载请联系作者获得授权。</p>
+<p><img src="media/16983209866520/%E6%89%AB%E7%A0%81_%E6%90%9C%E7%B4%A2%E8%81%94%E5%90%88%E4%BC%A0%E6%92%AD%E6%A0%B7%E5%BC%8F-%E6%A0%87%E5%87%86%E8%89%B2%E7%89%88.png" alt="扫码_搜索联合传播样式-标准色版" /></p>
+
+                        
+                      </div>
+                  </div>
+                </a>
+                <div class="read-more clearfix">
+                  <div class="more-left left">
+                  
+                    <span class="date">2023/10/26</span>
+                    <span>posted in&nbsp;</span> 
+          				  
+          					    <span class="posted-in"><a href='%E5%BC%80%E5%8F%91%E6%8A%80%E6%9C%AF.html'>开发技术</a></span>
+          				   
+                    
+
+                  </div>
+                  <div class="more-right right">
+                  <span class="comments">
+                      
+
+                       
+                  </span>
+                  </div>
+                </div>
+              </div><!-- article -->
+        
+			<div class="article">
+                <a class="clearlink" href="16981628492436.html">
+                
+                  <h1>vue中js文件的严格语法的设置</h1>
+                  <div class="a-content">
+                      
+                      <div class="a-content-text">
+                        
+                        	<p>在进行vue的开发中，在写ts文件时候，遇到有这么一个报错。经过查阅资料和实际进行解决，问题就是出现在了这个语法的严格造成的。</p>
+<h2><a id="1%E6%8A%A5%E9%94%99" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>1 报错</h2>
+<p>以下是对应的报错问题:</p>
+<p><img src="http://image.redtea.top//imagevue%E7%B3%BB%E5%88%97_ts%E8%AF%AD%E6%B3%95%E4%B8%A5%E6%A0%BC%E6%A8%A1%E5%BC%8F%E6%8A%A5%E9%94%99_20231024171652.png?e=9000000000&amp;token=_pgcTSP3oIupXCcKpdZYLsvKfaaNPV-1PBxNOtDy:0fLhfo1v8bhB3Jx4noi1L9MZQ4s=" alt="image.png" /></p>
+<h2><a id="2%E7%BC%98%E7%94%B1" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>2 缘由</h2>
+<p>更严格的类属性检查<br />
+TypeScript 2.7引入了一个新的控制严格性的标记 <code>--strictPropertyInitialization</code></p>
+<p>使用这个标记会确保类的每个实例属性都会在构造函数里或使用属性初始化器赋值。 在某种意义上，它会明确地进行从变量到类的实例属性的赋值检查</p>
+<h2><a id="3%E8%A7%A3%E5%86%B3%E5%8A%9E%E6%B3%95" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>3 解决办法</h2>
+<p>找到文件中的tsconfig.json配置文件，增加或者修改配置  将严格初始初始化属性去掉<br />
+<code>  &quot;strictPropertyInitialization&quot;: false,</code></p>
+<p><img src="http://image.redtea.top//imagevue%E7%B3%BB%E5%88%97_vueTS%E4%B8%A5%E6%A0%BC%E8%AF%AD%E6%B3%95_20231024171420.png?e=9000000000&amp;token=_pgcTSP3oIupXCcKpdZYLsvKfaaNPV-1PBxNOtDy:jrrUiF8qqMMpyVDi1qvLL1x27Gw=" alt="image.png" /></p>
+<p>参考链接 ：</p>
+<ul>
+<li><a href="https://juejin.cn/post/7068542157967065119">探索TypeScript中的高级编译器选项 - 掘金</a></li>
+<li><a href="https://www.tslang.cn/docs/release-notes/typescript-2.7.html">TypeScript 2.7 · TypeScript中文网 · TypeScript——JavaScript的超集</a></li>
+</ul>
+<p>本文作者：redtea 红茶的博客<br />
+本文链接：<a href="https://redtea.top">https://redtea.top</a><br />
+版权声明：本文采用 知识共享署名-非商业性使用-相同方式共享 4.0 国际许可协议 进行许可，非商业转载及引用请注明出处（作者、原文链接），商业转载请联系作者获得授权。</p>
+<p><img src="media/16981628492436/%E6%89%AB%E7%A0%81_%E6%90%9C%E7%B4%A2%E8%81%94%E5%90%88%E4%BC%A0%E6%92%AD%E6%A0%B7%E5%BC%8F-%E6%A0%87%E5%87%86%E8%89%B2%E7%89%88.png" alt="扫码_搜索联合传播样式-标准色版" /></p>
+
+                        
+                      </div>
+                  </div>
+                </a>
+                <div class="read-more clearfix">
+                  <div class="more-left left">
+                  
+                    <span class="date">2023/10/24</span>
+                    <span>posted in&nbsp;</span> 
+          				  
+          					    <span class="posted-in"><a href='%E5%BC%80%E5%8F%91%E6%8A%80%E6%9C%AF.html'>开发技术</a></span>
+          				   
+                    
+
+                  </div>
+                  <div class="more-right right">
+                  <span class="comments">
+                      
+
+                       
+                  </span>
+                  </div>
+                </div>
+              </div><!-- article -->
+        
+			<div class="article">
                 <a class="clearlink" href="16979440824598.html">
                 
                   <h1>TypeScript的严格语法限制解决方案</h1>
@@ -282,6 +410,18 @@ TypeScript 2.7引入了一个新的控制严格性的标记 <code>--strictPrope
 	      
 		      
 			      <li class="post">
+			        <a href="ji-shu-bo-ke-mo-banzui-jin-zai.html">nginx报错413的解决流程</a>
+			      </li>
+		     
+		  
+		      
+			      <li class="post">
+			        <a href="16981628492436.html">vue中js文件的严格语法的设置</a>
+			      </li>
+		     
+		  
+		      
+			      <li class="post">
 			        <a href="16979440824598.html">TypeScript的严格语法限制解决方案</a>
 			      </li>
 		     
@@ -299,16 +439,8 @@ TypeScript 2.7引入了一个新的控制严格性的标记 <code>--strictPrope
 		     
 		  
 		      
-			      <li class="post">
-			        <a href="16964281020029.html">基于node.js 和hexo框架搭建博客系统</a>
-			      </li>
-		     
 		  
 		      
-			      <li class="post">
-			        <a href="16963537816256.html">结合mwebpro和GitHub pages的网站发布流程</a>
-			      </li>
-		     
 		   
 		  		</ul>
                 </div>
