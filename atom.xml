@@ -4,13 +4,176 @@
   <title><![CDATA[📙红茶的博客]]></title>
   <link href="redtea.top/atom.xml" rel="self"/>
   <link href="redtea.top/"/>
-  <updated>2023-10-26T19:59:10+08:00</updated>
+  <updated>2023-10-26T20:00:46+08:00</updated>
   <id>redtea.top/</id>
   <author>
     <name><![CDATA[]]></name>
     
   </author>
   <generator uri="http://www.mweb.im/">MWeb</generator>
+  
+  <entry>
+    <title type="html"><![CDATA[Apache Log4j Java 日志组件详解]]></title>
+    <link href="redtea.top/16983211743848.html"/>
+    <updated>2023-10-26T19:52:54+08:00</updated>
+    <id>redtea.top/16983211743848.html</id>
+    <content type="html"><![CDATA[
+<blockquote>
+<p>前言：<br />
+Log4j 是 Apache 的一个开放源代码项目，通过使用 Log4j，我们可以控制日志信息输送的目的地是控制台、文件、GUI 组件、甚至是套接口服务 器、NT 的事件记录器、UNIX Syslog 守护进程等；</p>
+</blockquote>
+<p>我们也可以控制每一条日志的输出格式；通过定义每一条日志信息的级别，我们能够更加细致地控制日志的生成过程。</p>
+<p>最令人感兴趣的就 是，这些可以通过一个配置文件来灵活地进行配置，而不需要修改应用的代码。</p>
+<h2><a id="1%E4%B8%BB%E8%A6%81%E7%9A%84%E7%BB%84%E4%BB%B6" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>1 主要的组件</h2>
+<p>Log4j有三个主要的组件：<br />
+loggers： 负责捕获日志信息  ，即日志纪录器，控制日志的输出以及输出级别(JUL做日志级别用Level类)<br />
+appenders： 负责输出信息到不同的目的地  ，即输出日志到指定的地方<br />
+layouts： 负责使用不同的样式输出日志，即格式化日志</p>
+<h3><a id="1-1%E6%97%A5%E5%BF%97%E7%BA%A7%E5%88%AB" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>1.1 日志级别</h3>
+<p>例如DEBUG、INFO、WARN、ERROR…级别是分大小的，<br />
+<code>DEBUG &lt; INFO &lt; WARN &lt; ERROR</code>，可以用来代指该日志的重要程度，可以由这个来设置对应的。<br />
+<img src="http://image.redtea.top//imagejava%E5%BC%80%E5%8F%91_log4j_%E6%97%A5%E5%BF%97%E7%BA%A7%E5%88%AB_20231025145108.png?e=9000000000&amp;token=_pgcTSP3oIupXCcKpdZYLsvKfaaNPV-1PBxNOtDy:KaOOACFFggCxPV_QfAvaqGykYnQ=" alt="image.png" /></p>
+<h3><a id="1-2%E6%97%A5%E5%BF%97%E8%BE%93%E5%87%BA%E4%BD%8D%E7%BD%AE" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>1.2 日志输出位置</h3>
+<p>日志输出的位置是由参数appender决定的，根据不同的参数设定，可以将日志文件自定义输出到控制台、文件中等</p>
+<pre class="line-numbers"><code class="language-markdown">- 常用Appenders：
+    - ConsoleAppender  
+        将日志输出到控制台
+    - FileAppender 
+        将日志输出到文件中
+    - DailyRollingFileAppender (根据天数来对新日志文件的创建)  
+        将日志输出到一个日志文件，并且每天输出到一个新的文件
+    - RollingFileAppender (根据大小来对新日志文件的创建)  
+        将日志信息输出到一个日志文件，并且指定文件的尺寸，当文件大小达到指定尺寸时，会自动把文件改名，同时产生一个新的文件
+    - JDBCAppender 
+        把日志信息保存到数据库中
+</code></pre>
+<h3><a id="1-3%E6%97%A5%E5%BF%97%E6%A0%BC%E5%BC%8F%E5%8C%96" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>1.3 日志格式化</h3>
+<p>在日志输出中，用户可以根据自己的实际需求，把对应的日志按照自己的想法和格式进行输出，在Layouts给用户提供四种日志输出样式。</p>
+<ul>
+<li>
+<p>根据HTML样式</p>
+</li>
+<li>
+<p>自由指定样式</p>
+</li>
+<li>
+<p>包含日志级别与信息的样式</p>
+</li>
+<li>
+<p>包含日志时间、线程、类别等信息的样式</p>
+</li>
+<li>
+<p>常用Layouts:</p>
+<ul>
+<li><strong>HTMLLayout</strong><br />
+格式化日志输出为HTML表格形式</li>
+<li><strong>SimpleLayout</strong><br />
+简单的日志输出格式化，打印的日志格式如默认INFO级别的消息</li>
+<li><strong><code>PatternLayout</code></strong><br />
+最强大的格式化组件，可以根据自定义格式输出日志，如果没有指定转换格式， 就是用默认的转换格式</li>
+</ul>
+</li>
+</ul>
+<p>案例使用：</p>
+<pre class="line-numbers"><code class="language-plain_text">- %m 输出代码中指定的日志信息
+- %p 输出优先级，及 DEBUG、INFO 等
+- %n 换行符（Windows平台的换行符为 “\n”，Unix 平台为 “\n”）
+- %r 输出自应用启动到输出该 log 信息耗费的毫秒数
+- %c 输出打印语句所属的类的全名
+- %t 输出产生该日志的线程全名
+- %d 输出服务器当前时间，默认为 ISO8601，也可以指定格式，如：%d{yyyy年MM月dd日 HH:mm:ss}
+- %l 输出日志时间发生的位置，包括类名、线程、及在代码中的行数。如：Test.main(Test.java:10)
+- %F 输出日志消息产生时所在的文件名称
+- %L 输出代码中的行号
+- %% 输出一个 “%” 字符  
+    可以在 % 与字符之间加上修饰符来控制最小宽度、最大宽度和文本的对其方式。 
+    如：  
+    %5c 输出category名称，最小宽度是5，category&lt;5，默认的情况下右对齐  
+    %-5c 输出category名称，最小宽度是5，category&lt;5，&quot;-&quot;号指定左对齐,会有空格  
+    %.5c 输出category名称，最大宽度是5，category&gt;5，就会将左边多出的字符截掉，&lt;5不  
+    会有空格  
+    %20.30c category名称&lt;20补空格，并且右对齐，&gt;30字符，就从左边交远销出的字符截掉
+</code></pre>
+<h3><a id="1-4%E9%A1%B9%E7%9B%AE%E4%BD%BF%E7%94%A8%E6%83%85%E5%86%B5%E8%AF%B4%E6%98%8E%EF%BC%9A" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>1.4 项目使用情况说明：</h3>
+<p>输出日志使用是DailyRollingFileAppender，会每天生成日志。<br />
+==优化点：== 目前项目中有实时库的存在，写日志会很多，导致当日日志文件也会很大，查看日志的时候会存在打开困难的情况，可以考虑使用按大小创建日志比如300MB创建一个新的，给一个新的命名。</p>
+<p>输出级别：<br />
+目前的级别是在debug info  warn error 这几个级别中<br />
+分为两个目录写日志 debug_log 、 error_log 这两个,error中写的是info最小的，debug中写的是debug最小的。<br />
+==优化点：== 两个日志写入内容有重复，<br />
+1、可以在控制层对日志进行整理处理，分别在不同的地方写入不同的日志。<br />
+2、规划重要耗时做debug处理，其他警告、报错信息放到error中去。</p>
+<pre class="line-numbers"><code class="language-xml">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; ?&gt;  
+&lt;!DOCTYPE log4j:configuration PUBLIC  
+  &quot;-//APACHE//DTD LOG4J 1.2//EN&quot; &quot;http://logging.apache.org/log4j/1.2/apidocs/org/apache/log4j/xml/doc-files/log4j.dtd&quot;&gt;  
+&lt;log4j:configuration xmlns:log4j=&quot;http://jakarta.apache.org/log4j/&quot;&gt;  
+  
+    &lt;appender name=&quot;A_ERROR&quot; class=&quot;org.apache.log4j.DailyRollingFileAppender&quot;&gt;  
+        &lt;param name=&quot;Append&quot; value=&quot;true&quot;/&gt;  
+        &lt;param name=&quot;Encoding&quot; value=&quot;UTF-8&quot; /&gt;  
+        &lt;param name=&quot;File&quot; value=&quot;/var/opt/meta/webapp/logs/meta_error.log&quot;/&gt;  
+        &lt;param name=&quot;DatePattern&quot; value=&quot;'.'yyyyMMdd&quot;/&gt;  
+        &lt;layout class=&quot;org.apache.log4j.PatternLayout&quot;&gt;  
+            &lt;param name=&quot;ConversionPattern&quot; value=&quot;%d{yyyy/MM/dd HH:mm:ss} [%-5p] - %m%n&quot;/&gt;  
+        &lt;/layout&gt;  
+        &lt;filter class=&quot;org.apache.log4j.varia.LevelRangeFilter&quot;&gt;  
+            &lt;param name=&quot;LevelMin&quot; value=&quot;info&quot;/&gt;  
+            &lt;param name=&quot;LevelMax&quot; value=&quot;error&quot;/&gt;  
+            &lt;param name=&quot;AcceptOnMatch&quot; value=&quot;true&quot;/&gt;  
+        &lt;/filter&gt;  
+    &lt;/appender&gt;  
+  
+    &lt;appender name=&quot;A_DEBUG&quot; class=&quot;org.apache.log4j.DailyRollingFileAppender&quot;&gt;  
+        &lt;param name=&quot;Append&quot; value=&quot;true&quot;/&gt;  
+        &lt;param name=&quot;Encoding&quot; value=&quot;UTF-8&quot; /&gt;  
+        &lt;param name=&quot;File&quot; value=&quot;/var/opt/meta/webapp/logs/meta_debug.log&quot;/&gt;  
+        &lt;param name=&quot;DatePattern&quot; value=&quot;'.'yyyyMMdd&quot;/&gt;  
+        &lt;layout class=&quot;org.apache.log4j.PatternLayout&quot;&gt;  
+            &lt;param name=&quot;ConversionPattern&quot; value=&quot;%d{yyyy/MM/dd HH:mm:ss} [%-5p] - %m%n&quot;/&gt;  
+        &lt;/layout&gt;  
+        &lt;filter class=&quot;org.apache.log4j.varia.LevelRangeFilter&quot;&gt;  
+            &lt;param name=&quot;LevelMin&quot; value=&quot;debug&quot;/&gt;  
+            &lt;param name=&quot;LevelMax&quot; value=&quot;error&quot;/&gt;  
+            &lt;param name=&quot;AcceptOnMatch&quot; value=&quot;true&quot;/&gt;  
+        &lt;/filter&gt;  
+    &lt;/appender&gt;  
+  
+    &lt;!-- framework logger --&gt;  
+    &lt;logger name=&quot;java.sql&quot;&gt;  
+        &lt;level value=&quot;warn&quot; /&gt;  
+    &lt;/logger&gt;  
+  
+    &lt;logger name=&quot;org.mybatis&quot;&gt;  
+        &lt;level value=&quot;warn&quot; /&gt;  
+&lt;!--        &lt;appender-ref ref=&quot;STDOUT&quot; /&gt;--&gt;  
+    &lt;/logger&gt;  
+  
+    &lt;logger name=&quot;org.apache&quot;&gt;  
+        &lt;level value=&quot;warn&quot; /&gt;  
+    &lt;/logger&gt;  
+  
+    &lt;logger name=&quot;org.springframework&quot;&gt;  
+        &lt;level value=&quot;warn&quot; /&gt;  
+    &lt;/logger&gt;  
+  
+    &lt;!-- the root logger --&gt;  
+    &lt;root&gt;  
+        &lt;level value=&quot;all&quot; /&gt;  
+        &lt;appender-ref ref=&quot;A_ERROR&quot; /&gt;  
+        &lt;appender-ref ref=&quot;A_DEBUG&quot; /&gt;  
+    &lt;/root&gt;  
+  
+&lt;/log4j:configuration&gt;
+</code></pre>
+<p>参考链接 ：<br />
+<a href="https://blog.csdn.net/m0_37989980/article/details/123680391">【精选】日志框架(2) : Log4j介绍及使用_log4j日志的使用-CSDN博客</a></p>
+<p><a href="https://blog.csdn.net/qq_34988540/article/details/99821083">log4j配置详解 log4j中文文档_log4j官方文档-CSDN博客</a></p>
+<p>本文作者：redtea 红茶的博客<br />
+本文链接：<a href="https://redtea.top%E7%89%88%E6%9D%83%E5%A3%B0%E6%98%8E%EF%BC%9A%E6%9C%AC%E6%96%87%E9%87%87%E7%94%A8">https://redtea.top版权声明：本文采用</a> 知识共享署名-非商业性使用-相同方式共享 4.0 国际许可协议 进行许可，非商业转载及引用请注明出处（作者、原文链接），商业转载请联系作者获得授权。</p>
+<p><img src="media/16983211743848/%E6%89%AB%E7%A0%81_%E6%90%9C%E7%B4%A2%E8%81%94%E5%90%88%E4%BC%A0%E6%92%AD%E6%A0%B7%E5%BC%8F-%E6%A0%87%E5%87%86%E8%89%B2%E7%89%88.png" alt="扫码_搜索联合传播样式-标准色版" /></p>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[nginx报错413的解决流程]]></title>
