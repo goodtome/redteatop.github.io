@@ -4,13 +4,62 @@
   <title><![CDATA[📙红茶的博客]]></title>
   <link href="redtea.top/atom.xml" rel="self"/>
   <link href="redtea.top/"/>
-  <updated>2023-10-26T20:09:26+08:00</updated>
+  <updated>2023-10-28T23:18:55+08:00</updated>
   <id>redtea.top/</id>
   <author>
     <name><![CDATA[]]></name>
     
   </author>
   <generator uri="http://www.mweb.im/">MWeb</generator>
+  
+  <entry>
+    <title type="html"><![CDATA[obsidan中附件管理的原则和处理方案]]></title>
+    <link href="redtea.top/16996976874415.html"/>
+    <updated>2023-11-11T18:14:47+08:00</updated>
+    <id>redtea.top/16996976874415.html</id>
+    <content type="html"><![CDATA[
+<p>在做笔记的过程中，不可避免的会涉及到图片的分享。是选择将图片直接放在本地，还是将文件通过图床的方式进行分享、本地只存图片连接。</p>
+<p>本文将结合这两种方式，进行分析，说说我自己的看法和实践经验，至少这两种方案都有使用过。</p>
+<h2><a id="1%E7%BA%AF%E6%9C%AC%E5%9C%B0%E5%AD%98%E5%82%A8" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>1 纯本地存储</h2>
+<p>当初使用这个本地储存的原因，也是刚由其他笔记转为使用obsidan，看中的就是能将笔记放在本地，能确保自己的笔记真属于自己。不会因为，使用其他平台服务器故障，宕机的情况下笔记丢失。</p>
+<p>在这个前提下，实际就能做本地图片附件的管理，重要的就是能将图片重命名和放下特定位置下做管理，这就是解决本地存储的最大问题。</p>
+<h3><a id="1-1%E8%A7%A3%E5%86%B3%E8%BF%99%E4%B8%AA%E9%97%AE%E9%A2%98%E4%B8%BB%E8%A6%81%E5%B0%B1%E6%9C%89%E4%B8%A4%E4%B8%AA%E6%AD%A5%E9%AA%A4%EF%BC%9A" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>1.1 解决这个问题主要就有两个步骤：</h3>
+<p>一是对obsidan软件本身设定附件文件夹，设置好对应的附件文件夹的路径，这样能保证所有的图片都能放在这个路径下。</p>
+<p>二是使用插件<code>paste image rename</code> ， 进行如图设置后，就能进行自动重命名了，方便后期查找。</p>
+<p><img src="http://image.redtea.top/images/202311111807594.png?e=9000000000&amp;token=_pgcTSP3oIupXCcKpdZYLsvKfaaNPV-1PBxNOtDy:3QAO205eSdXC1Yn-uGrGW2rPIp8=" alt="" /></p>
+<p><img src="http://image.redtea.top/images/202311111807565.png?e=9000000000&amp;token=_pgcTSP3oIupXCcKpdZYLsvKfaaNPV-1PBxNOtDy:lcRv7PLP_XZpOcdA4MCsvUhOAww=" alt="" /></p>
+<h2><a id="2%E4%BA%91%E7%AB%AF%E5%AD%98%E5%82%A8" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>2 云端存储</h2>
+<p>云端存储，能实现的最大方便之处在于，本地没有了太多的图片文件，不会再影响obsdian的加载速度。</p>
+<p>使用这种方式有很多的方案可以实现，总的方向就是存储仓库+图床工具+obsdian插件。</p>
+<h3><a id="2-1%E5%AD%98%E5%82%A8%E4%BB%93%E5%BA%93%E7%9A%84%E9%80%89%E6%8B%A9" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>2.1 存储仓库的选择</h3>
+<p>在存储仓库的选择上，其实还是蛮多的。就比如，如果你是程序员，可以尝试GitHub 、gitee这种，平时经常在使用的，也不用花费任何费用，学习成本也相对较低。</p>
+<p>其次，可以选择，腾讯云、阿里云、华为云等的oss存储技术，简单快捷，之间简单配置下就能使用，不用折腾太多的技术。它的优点就是简单快捷，费用也相对便宜，一年几十块就能搞定。</p>
+<p>再有就是相对花费高或者学习成本高的技术手段，直接上nas系统，将自己的储存放在自己的私有服务器中。还有就是拥有一台自己的服务，搭建属于自己的文件系统，在这个文件系统中做文件内容的管理，这种就会要求使用者有一定的技术能力，能在使用过程中，解决遇到的各种问题。<br />
+<img src="http://image.redtea.top/images/202311111807534.png?e=9000000000&amp;token=_pgcTSP3oIupXCcKpdZYLsvKfaaNPV-1PBxNOtDy:Ncgj80wreux2Ux6u6DzJvnG9WEc=" alt="" /></p>
+<p>仓库的选择还是相对重要，一旦选择，意味着接下来很长一段时间都会在使用这个仓库，只要这个仓库的内容多起来以后，想要做迁移，其实还是会存在很大的困难的。</p>
+<p>所以，在开始的时候，可以考虑好自己想要的仓库，做好未来两三年都会使用这个仓库的决定，以减少不必要的麻烦。</p>
+<h3><a id="2-2%E5%9B%BE%E5%BA%8A%E5%B7%A5%E5%85%B7%E7%9A%84%E9%80%89%E6%8B%A9" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>2.2 图床工具的选择</h3>
+<p>这个也是在做云端文件存储中很重要的一个环节。一般分为在线的小图床工具和比较知名的有专属客户端的图床工具。</p>
+<p>以前也用过在线的图床工具，使用了一段时间，发现其实还是有不少不方便的地方，在每一次上传图片的时候，需要自行登陆网站，上传好对应的图片以后，复制上传好的链接，在填写到自己的文章中，这种的效率实际上来说是增加了一个工作流的过程，拖慢了工作效率。</p>
+<p>后面发现还有专属客户端的工具，真香。能结合自己现有的工作流去快速的增加工作效率，真正提升自己的幸福感。就简单的例子，在对软件做好配置以后，能直接截图实现图片自动上传，上传后的链接自动保存剪贴板，直接ctrl+v就能使用，不可谓不快。</p>
+<h3><a id="2-3-obsidan%E6%8F%92%E4%BB%B6" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>2.3 obsidan插件</h3>
+<p>云端存储这个过程中，在配合使用obsdian的相关插件使用，可定会使用到的就是这个图片上传的插件<code>image auto plugin</code>,能实现图片的自动上传。</p>
+<p><img src="http://image.redtea.top/images/202311111804895.png?e=9000000000&amp;token=_pgcTSP3oIupXCcKpdZYLsvKfaaNPV-1PBxNOtDy:TLX4_ctnDPfmT2TQoQfQ9r4Zp08=" alt="" /></p>
+<h2><a id="3%E6%9C%AC%E5%9C%B0%E4%BA%91%E7%AB%AF%E7%9A%84%E5%AD%98%E5%82%A8%E5%BD%A2%E5%BC%8F" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>3 本地+云端的存储形式</h2>
+<p>由于在做笔记的时候涉及到的图片多是一些截图或者不是很大的图片，并且是希望更多的将图片放在本地做管理，这样更加保险一点。</p>
+<p>这种做法的核心是，把所有的图片放在obsdian的特定文件夹下，结合给图片修改名字的插件<code>paste image rename</code> ,实现将文件名字和文章的标题结合起来，方便后期查找。</p>
+<p>需要使用到云端储存的图片，比如发布文章的时候 ，可以将单独把图片上传到云端去。</p>
+<p>在这个方案下，既可以确保笔记的安全性，也能保障在写文章的时候足够的便捷，随时分享。</p>
+<h2><a id="4%E7%BB%93%E8%AF%AD" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>4 结语</h2>
+<p>笔记系统中附件的管理，从来就没有谁好谁坏之分，只有最适合自己的才是更好的。也只有在实践中，不停地去探索，才能找到适合自己的方式。</p>
+<p>折腾啊！就是快乐！！</p>
+<p>本文作者：redtea 红茶的博客<br />
+本文链接：<a href="https://redtea.top">https://redtea.top</a><br />
+版权声明：本文采用 知识共享署名-非商业性使用-相同方式共享 4.0 国际许可协议 进行许可，非商业转载及引用请注明出处（作者、原文链接），商业转载请联系作者获得授权。</p>
+<p><img src="media/16996976874415/%E6%89%AB%E7%A0%81_%E6%90%9C%E7%B4%A2%E8%81%94%E5%90%88%E4%BC%A0%E6%92%AD%E6%A0%B7%E5%BC%8F-%E6%A0%87%E5%87%86%E8%89%B2%E7%89%88.png" alt="扫码_搜索联合传播样式-标准色版" /></p>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[语雀和速度赛跑的8小时，我们学习到了什么？]]></title>
