@@ -102,6 +102,79 @@
 		<div class="markdown-body home-categories">
 		
 			<div class="article">
+                <a class="clearlink" href="ji-shu-bo-ke-mo-banzui-jin-zai.html">
+                
+                  <h1>nginx报错413的解决流程</h1>
+                  <div class="a-content">
+                      
+                      <div class="a-content-text">
+                        
+                        	<p>最近在处理项目问题的时候，遇到了有这么一个有趣的问题，不像其他的报错401、502、500 等，这直接报错了413，这在开发中是常见有不常见的一个状态码，代表着这在使用中有nginx上的问题。</p>
+<h2><a id="1-nginx%E6%8A%A5%E9%94%99413" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>1 nginx报错413</h2>
+<h3><a id="1-1%E9%97%AE%E9%A2%98%E6%98%BE%E7%A4%BA%EF%BC%9A" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>1.1 问题显示：</h3>
+<p>nginx 出现413 Request Entity Too Large<br />
+界面中添加了对应的图纸数据，点击保存，调用更新接口，数据中数据实体过多<br />
+<img src="http://image.redtea.top//imagejava%E5%BC%80%E5%8F%91_nginx%E6%8A%80%E6%9C%AF_%E5%AE%9E%E4%BD%93%E8%BF%87%E5%A4%A7%E9%85%8D%E7%BD%AE%E4%BF%AE%E6%94%B9.png?e=9000000000&amp;token=_pgcTSP3oIupXCcKpdZYLsvKfaaNPV-1PBxNOtDy:hH9V8U9F8Y7L0zcNWjvQ5eYBpq8=" alt="1884d3ce4eabbf13b4476395fb4e469.png" /></p>
+<h3><a id="1-2%E9%97%AE%E9%A2%98%E6%8E%92%E6%9F%A5" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>1.2 问题排查</h3>
+<ul>
+<li>在网页出现错误的时候，首先就是查看请求日志，做问题复现</li>
+<li>查询运行日志</li>
+</ul>
+<h3><a id="1-3%E5%8E%9F%E5%9B%A0" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>1.3 原因</h3>
+<p>nginx在做代理时候，对实际的数据转发有默认的限制，限制大小为1mb，这个可以在配置文件中进行修改</p>
+<h3><a id="1-4%E8%A7%A3%E5%86%B3%E5%8A%9E%E6%B3%95" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>1.4 解决办法</h3>
+<ul>
+<li>找到nginx配置文件 一般默认的路径是在<code>/etc/nginx/nginx.conf</code></li>
+<li>使用vi或者vim命令打开文件进行修改 ，英文模式下，按住i键进入编辑模式</li>
+<li>找到其中的http{}模块，模块中添加<code>client_max_body_size 20m;</code> ,数字可以根据实际情况自定义，esc退出编辑，<code>:wq</code> ，退出保存数据</li>
+<li>重启nginx ,<code>sudo systemctl restart  nginx</code></li>
+</ul>
+<h3><a id="1-5%E9%99%84%E5%BD%95" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>1.5 附录</h3>
+<p>pgsql中查询数据大小：</p>
+<pre class="line-numbers"><code class="language-sql">SELECT id, DATA-&gt;&gt;'name' AS filename , length(DATA::TEXT)/ 1024 AS leMB
+FROM tablename
+WHERE username= 'admin'
+ORDER BY leMB DESC ;
+</code></pre>
+<p>修改参数：<br />
+<img src="http://image.redtea.top//imagejava%E5%BC%80%E5%8F%91_nginx%E6%8A%80%E6%9C%AF_%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E5%A4%A7%E5%B0%8F%E9%99%90%E5%88%B6%E4%BF%AE%E6%94%B9.png?e=9000000000&amp;token=_pgcTSP3oIupXCcKpdZYLsvKfaaNPV-1PBxNOtDy:94lRP8TcZGLTx9Tl9PaStsjmt-s=" alt="5214bac6584a3c894e8bacd41344f0f.png" /></p>
+<h3><a id="%E7%BB%93%E8%AF%AD" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>结语</h3>
+<p>在遇到问题的时候，不着急，先看看报错日志，确定问题的位置，更好的能解决问题。</p>
+<blockquote>
+<p>[!emoji] 欢迎扫码查看更多我的文章</p>
+</blockquote>
+<p><img src="http://image.redtea.top//imageredtea_%E7%BD%91%E7%AB%99%E4%BA%8C%E7%BB%B4%E7%A0%81.png?e=9000000000&amp;token=_pgcTSP3oIupXCcKpdZYLsvKfaaNPV-1PBxNOtDy:8lvuOLe8ONYi6D1EAkyIkAQzyNQ=" alt="" /></p>
+<p>本文作者：redtea 红茶的博客<br />
+本文链接：<a href="https://redtea.top">https://redtea.top</a><br />
+版权声明：本文采用 知识共享署名-非商业性使用-相同方式共享 4.0 国际许可协议 进行许可，非商业转载及引用请注明出处（作者、原文链接），商业转载请联系作者获得授权。</p>
+<p><img src="media/16983209866520/%E6%89%AB%E7%A0%81_%E6%90%9C%E7%B4%A2%E8%81%94%E5%90%88%E4%BC%A0%E6%92%AD%E6%A0%B7%E5%BC%8F-%E6%A0%87%E5%87%86%E8%89%B2%E7%89%88.png" alt="扫码_搜索联合传播样式-标准色版" /></p>
+
+                        
+                      </div>
+                  </div>
+                </a>
+                <div class="read-more clearfix">
+                  <div class="more-left left">
+                  
+                    <span class="date">2023/10/26</span>
+                    <span>posted in&nbsp;</span> 
+          				  
+          					    <span class="posted-in"><a href='%E5%BC%80%E5%8F%91%E6%8A%80%E6%9C%AF.html'>开发技术</a></span>
+          				   
+                    
+
+                  </div>
+                  <div class="more-right right">
+                  <span class="comments">
+                      
+
+                       
+                  </span>
+                  </div>
+                </div>
+              </div><!-- article -->
+        
+			<div class="article">
                 <a class="clearlink" href="16979440824598.html">
                 
                   <h1>TypeScript的严格语法限制解决方案</h1>
@@ -317,96 +390,6 @@ TypeScript 2.7引入了一个新的控制严格性的标记 <code>--strictPrope
                 </div>
               </div><!-- article -->
         
-			<div class="article">
-                <a class="clearlink" href="16963537816256.html">
-                
-                  <h1>结合mwebpro和GitHub pages的网站发布流程</h1>
-                  <div class="a-content">
-                      
-                      <div class="a-content-text">
-                        
-                        	<p>在实际中有这样的几个需求，能基于一个域名快速的搭建属于自己的网站，有自己的博客。<br />
-最近正好在研究，如何搭建属于自己的一个博客系统，用经济快捷的方式搭建一个属于自己的博客。</p>
-<h3><a id="%E7%BD%91%E7%AB%99%E5%87%86%E5%A4%87" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>网站准备</h3>
-<p>在搭建之前，是需要有几个东西提前准备的。</p>
-<ol>
-<li>域名，提前购买好一个域名，大概的价格也就在10元年就能搞定，可分为国内和国外的域名。国内一般需要进行备案，整体所需时间大概在1个月左右。</li>
-<li>GitHub账号，可以百度GitHub，注册一个账号备用。</li>
-<li>静态站点生成器，比如hugo, hexo，Jekyll等，通过这个生成的内容，上传到GitHub中，进行访问。本次选用Mac版本的mweb pro，这是一个可以写md文件和发布功能的软件。</li>
-</ol>
-<h3><a id="github%E4%BB%93%E5%BA%93%E8%AE%BE%E7%BD%AE" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>GitHub仓库设置</h3>
-<ol>
-<li>
-<p>GitHub主要作用，一是作为一个网站资源页面的存储仓库，二是利GitHub自带的GitHub pages发布自己的网站。</p>
-</li>
-<li>
-<p>新建仓库，设置为public类型，仓库名字一定是 XXX.github.io，xxx是你自己定义的名字，可以随便命名。</p>
-</li>
-<li>
-<p>仓库建好后，点击<code>settings</code>,找到 <code>pages</code> , 对网站进行设置。source中选择资源来自于网页代码的分支，branch选择对应的分支，文件夹选择默认就好，custom domain中填写上自己的网站域名，dns解析通过后，会显示绿色的<code>DNS check successful</code>。<br />
-<img src="media/16963537816256/16963561739038.jpg" alt="" /></p>
-</li>
-<li>
-<p>在设置好后，上传代码会自动进行部署，将代码部署到自己的网站上。</p>
-</li>
-</ol>
-<h3><a id="%E5%9F%9F%E5%90%8D%E8%AE%BE%E7%BD%AE" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>域名设置</h3>
-<p>在购买域名后，还需要有几个设置，才能保证能正常访问到网页。</p>
-<ol>
-<li>GitHub设置dns解析。打开域名购买商或者代理商的网站，把GitHub的几个地址解析添加上去。</li>
-</ol>
-<pre class="line-numbers"><code class="language-plain_text">185.199.108.153
-185.199.109.153
-185.199.110.153
-185.199.111.153
-</code></pre>
-<ol start="2">
-<li>
-<p>设置指向GitHub页面的dns代理。添加解析记录，类型选择cname，名称选择www ,内容就是自己在GitHub设置的仓库名字。<br />
-<img src="media/16963537816256/16963567820685.jpg" alt="" /></p>
-</li>
-<li>
-<p>验证是否有绑定成功，使用命令 <code>dig 自己域名</code>，可以看到解析后的域名地址。</p>
-</li>
-</ol>
-<h3><a id="mweb-pro%E7%9A%84%E8%AE%BE%E7%BD%AE" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>mweb pro的设置</h3>
-<p>前面的几部分设置好了，剩下的就是网页页面的编写，可以按照以下的步骤进行设置。<br />
-<img src="media/16963537816256/16963575233471.jpg" alt="" /></p>
-<ol>
-<li>在第一步中添加一个静态网站分类，然后进行设置。</li>
-<li>填写好名称，选择想要的模版，有好几个模版选择，可以一一尝试找到自己的风格。</li>
-<li>网站名称，填写属于自己的博客名字。</li>
-<li>网站地址就是自己的网址。</li>
-<li>设置好后，选择清理并重新生成网站，就能得到新的网站页面</li>
-<li>选择上传GitHub后，等代GitHub的自动化部署完成，就能直接访问了。</li>
-</ol>
-<p>在构建的过程中，会遇到各种错误，可以根据这些错误去搜索解决办法解决，当真的网站搭建成功后，整个人都是快乐的。</p>
-
-                        
-                      </div>
-                  </div>
-                </a>
-                <div class="read-more clearfix">
-                  <div class="more-left left">
-                  
-                    <span class="date">2023/10/04</span>
-                    <span>posted in&nbsp;</span> 
-          				  
-          					    <span class="posted-in"><a href='%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8.html'>工具使用</a></span>
-          				   
-                    
-
-                  </div>
-                  <div class="more-right right">
-                  <span class="comments">
-                      
-
-                       
-                  </span>
-                  </div>
-                </div>
-              </div><!-- article -->
-        
               
 
 
@@ -418,7 +401,7 @@ TypeScript 2.7引入了一个新的控制严格性的标记 <code>--strictPrope
 			  </div>
 			  <div class="large-6 columns">
 			<p class="text-right" style="padding-top:25px;">
-			
+			 <a href="all_2.html">&raquo; Next Page</a> 
 			</p>
 			  </div>
 			</div>
@@ -480,6 +463,12 @@ TypeScript 2.7引入了一个新的控制严格性的标记 <code>--strictPrope
 	      
 		      
 			      <li class="post">
+			        <a href="17001950885983.html">Scala语言函数式编程数组转换错误</a>
+			      </li>
+		     
+		  
+		      
+			      <li class="post">
 			        <a href="16996976874415.html">obsidan中附件管理的原则和处理方案</a>
 			      </li>
 		     
@@ -503,10 +492,6 @@ TypeScript 2.7引入了一个新的控制严格性的标记 <code>--strictPrope
 		     
 		  
 		      
-			      <li class="post">
-			        <a href="ji-shu-bo-ke-mo-banzui-jin-zai.html">nginx报错413的解决流程</a>
-			      </li>
-		     
 		  
 		      
 		  
