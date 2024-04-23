@@ -102,6 +102,184 @@
 		<div class="markdown-body home-categories">
 		
 			<div class="article">
+                <a class="clearlink" href="17138506852505.html">
+                
+                  <h1>python_测试_异步库插件asyncio</h1>
+                  <div class="a-content">
+                      
+                      <div class="a-content-text">
+                        
+                        	<p>在python的测试中，如果实际的代码中有异步的代码，如果单纯的调用代码是会出现报错的问题。<br />
+需要在测试代码中添加插件pytest-asyncio,这是一个专注于进行异步测试的pytest的插件。</p>
+<h2><a id="1%E5%AE%89%E8%A3%85" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>1 安装</h2>
+<p>根据官网的连接：<a href="https://pypi.org/project/pytest-asyncio/">pytest-asyncio · PyPI</a><br />
+在终端下载对应的库: <code>$ pip install pytest-asyncio</code><br />
+在测试代码方法上添加注解： <code>@@pytest.mark.asyncio</code></p>
+<h2><a id="2%E4%BD%BF%E7%94%A8" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>2 使用</h2>
+<p>具体的使用办法可以参见以下代码：</p>
+<pre class="line-numbers"><code class="language-python">@pytest.mark.asyncio
+async def test_some_asyncio_code():
+    res = await library.do_something()
+    assert b&quot;expected result&quot; == res
+</code></pre>
+<h2><a id="3%E6%A1%88%E4%BE%8B" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>3 案例</h2>
+<p>在不同的测试场景中，都是能使用到插件的。</p>
+<h3><a id="3-1%E5%9C%A8%E5%90%8C%E4%B8%80%E4%BA%8B%E4%BB%B6-loop%E4%B8%AD%E8%BF%90%E8%A1%8Cclass%E4%B8%AD%E7%9A%84%E6%89%80%E6%9C%89%E6%B5%8B%E8%AF%95" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>3.1 在同一事件loop中运行class中的所有测试</h3>
+<p>所有测试都可以通过使用pytest.mark.asyncio（scope =“ class”）标记在同一事件循环中运行。通过使用Asyncio标记作为类装饰器，可以很容易地实现这一点。</p>
+<pre class="line-numbers"><code class="language-python">import asyncio
+
+import pytest
+
+@pytest.mark.asyncio(scope=&quot;class&quot;)
+class TestInOneEventLoopPerClass:
+    loop: asyncio.AbstractEventLoop
+
+    async def test_remember_loop(self):
+        TestInOneEventLoopPerClass.loop = asyncio.get_running_loop()
+
+    async def test_assert_same_loop(self):
+        assert asyncio.get_running_loop() is TestInOneEventLoopPerClass.loop
+</code></pre>
+<h3><a id="3-2%E5%9C%A8%E5%90%8C%E4%B8%80%E4%BA%8B%E4%BB%B6-loop%E4%B8%AD%E8%BF%90%E8%A1%8Cmodule%E4%B8%AD%E7%9A%84%E6%89%80%E6%9C%89%E6%B5%8B%E8%AF%95" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>3.2 在同一事件loop中运行module中的所有测试</h3>
+<p>所有测试都可以通过使用pytest.mark.asyncio（scope =“ module”）标记在同一事件循环中运行。通过向您的模块添加pytestmark语句可以轻松实现这一点。</p>
+<pre class="line-numbers"><code class="language-python">import asyncio
+
+import pytest
+
+pytestmark = pytest.mark.asyncio(scope=&quot;module&quot;)
+
+loop: asyncio.AbstractEventLoop
+
+async def test_remember_loop():
+    global loop
+    loop = asyncio.get_running_loop()
+
+async def test_assert_same_loop():
+    global loop
+    assert asyncio.get_running_loop() is loop
+
+</code></pre>
+<h3><a id="3-3%E5%9C%A8%E5%90%8C%E4%B8%80%E4%BA%8B%E4%BB%B6-loop%E4%B8%AD%E8%BF%90%E8%A1%8C%E5%8C%85%E8%A3%85%E4%B8%AD%E7%9A%84%E6%89%80%E6%9C%89%E6%B5%8B%E8%AF%95" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>3.3 在同一事件loop中运行包装中的所有测试</h3>
+<p>所有测试都可以通过使用pytest.mark.asyncio（scope =“ package”）标记在同一事件循环中。将以下代码添加到测试包的__init__.py：</p>
+<p>请注意，此标记不会传递给子弹中的测试。子包构成了自己的单独包装。</p>
+<pre class="line-numbers"><code class="language-python">import pytest
+
+pytestmark = pytest.mark.asyncio(scope=&quot;package&quot;)
+</code></pre>
+<h3><a id="3-4%E5%9C%A8%E5%90%8C%E4%B8%80%E4%BA%8B%E4%BB%B6%E5%BE%AA%E7%8E%AF%E4%B8%AD%E8%BF%9B%E8%A1%8C%E4%BC%9A%E8%AF%9D%E4%B8%AD%E7%9A%84%E6%89%80%E6%9C%89%E6%B5%8B%E8%AF%95" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>3.4 在同一事件循环中进行会话中的所有测试</h3>
+<p>所有测试都可以通过使用pytest.mark.asyncio（scope =“ session”）标记在同一事件循环中运行。标记所有测试的最简单方法是通过pytest_collection_modifyitems挂钩在您的测试套件的根文件夹中的conftest.py。</p>
+<pre class="line-numbers"><code class="language-python">import pytest
+
+from pytest_asyncio import is_async_test
+
+def pytest_collection_modifyitems(items):
+    pytest_asyncio_tests = (item for item in items if is_async_test(item))
+    session_scope_marker = pytest.mark.asyncio(scope=&quot;session&quot;)
+    for async_test in pytest_asyncio_tests:
+        async_test.add_marker(session_scope_marker, append=False)
+</code></pre>
+<h3><a id="3-5%E4%BD%BF%E7%94%A8%E4%B8%8D%E5%90%8C%E7%9A%84%E4%BA%8B%E4%BB%B6%E5%BE%AA%E7%8E%AF%E6%B5%8B%E8%AF%95" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>3.5 使用不同的事件循环测试</h3>
+<p>参数化event_loop_policy灯具参数参数所有异步测试。下面的示例会导致所有异步测试多次运行，一次在固定框架参数中为每个事件循环运行：</p>
+<pre class="line-numbers"><code class="language-python">import asyncio
+from asyncio import DefaultEventLoopPolicy
+
+import pytest
+
+class CustomEventLoopPolicy(DefaultEventLoopPolicy):
+    pass
+
+@pytest.fixture(
+    scope=&quot;session&quot;,
+    params=(
+        CustomEventLoopPolicy(),
+        CustomEventLoopPolicy(),
+    ),
+)
+def event_loop_policy(request):
+    return request.param
+
+@pytest.mark.asyncio
+async def test_uses_custom_event_loop_policy():
+    assert isinstance(asyncio.get_event_loop_policy(), CustomEventLoopPolicy)
+</code></pre>
+<h3><a id="3-6-events%E4%BA%8B%E4%BB%B6" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>3.6 events事件</h3>
+<p>参数化event_loop_policy 参数参数所有异步测试。下面的示例会导致所有异步测试多次运行，一次在固定框架参数中为每个事件循环运行：</p>
+<p>如果您只希望测试的一个子集与不同的事件循环一起运行，则可以选择将fixture的范围限制为包、模块或类。</p>
+<pre class="line-numbers"><code class="language-python">import asyncio
+from asyncio import DefaultEventLoopPolicy
+
+import pytest
+
+class CustomEventLoopPolicy(DefaultEventLoopPolicy):
+    pass
+
+@pytest.fixture(
+    scope=&quot;session&quot;,
+    params=(
+        CustomEventLoopPolicy(),
+        CustomEventLoopPolicy(),
+    ),
+)
+def event_loop_policy(request):
+    return request.param
+
+@pytest.mark.asyncio
+async def test_uses_custom_event_loop_policy():
+    assert isinstance(asyncio.get_event_loop_policy(), CustomEventLoopPolicy)
+</code></pre>
+<h3><a id="3-7%E5%A6%82%E4%BD%95%E5%AF%B9-uvloop%E8%BF%9B%E8%A1%8C%E6%B5%8B%E8%AF%95" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>3.7 如何对uvloop进行测试</h3>
+<p>RedeFinig event_loop_policy固定装置将参数所有异步测试。以下示例会导致所有异步测试多次运行，一次在固定夹参数中为每个事件循环进行一次：替换您的conftest.py中的默认事件循环策略：</p>
+<p>如果您只希望使用UVloop运行测试的子集，则可以选择将固定装置的范围限制为包装，模块或类。</p>
+<pre class="line-numbers"><code class="language-python">import pytest
+import uvloop
+
+@pytest.fixture(scope=&quot;session&quot;)
+def event_loop_policy():
+    return uvloop.EventLoopPolicy()
+</code></pre>
+<h3><a id="3-8%E5%A6%82%E4%BD%95%E5%88%A4%E6%96%AD%E5%87%BD%E6%95%B0%E6%98%AF%E4%B8%8D%E6%98%AF%E4%B8%BA%E5%BC%82%E6%AD%A5" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>3.8 如何判断函数是不是为异步</h3>
+<p>使用pytest_asyncio.is_async_item来确定测试项目是否是异步和由pytest-assyncio管理的。</p>
+<pre class="line-numbers"><code class="language-python">from pytest_asyncio import is_async_test
+
+def pytest_collection_modifyitems(items):
+    for item in items:
+        if is_async_test(item):
+            pass
+</code></pre>
+<h2><a id="4%E6%B3%A8%E6%84%8F" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>4 注意</h2>
+<p>这个插件也有自己的问题：<br />
+它不支持标准联合库的测试类。建议用户使用UnitTest.isolatedAsynciotestcase或异步框架（例如异步）。</p>
+<p>本文作者：redtea 红茶的博客<br />
+本文链接：<a href="https://redtea.top/16964281020029.html">https://redtea.top/16964281020029.html</a><br />
+版权声明：本文采用 知识共享署名-非商业性使用-相同方式共享 4.0 国际许可协议 进行许可，非商业转载及引用请注明出处（作者、原文链接），商业转载请联系作者获得授权。</p>
+<p><img src="media/17138506852505/%E6%89%AB%E7%A0%81_%E6%90%9C%E7%B4%A2%E8%81%94%E5%90%88%E4%BC%A0%E6%92%AD%E6%A0%B7%E5%BC%8F-%E6%A0%87%E5%87%86%E8%89%B2%E7%89%88.png" alt="扫码_搜索联合传播样式-标准色版" /></p>
+
+                        
+                      </div>
+                  </div>
+                </a>
+                <div class="read-more clearfix">
+                  <div class="more-left left">
+                  
+                    <span class="date">2024/04/23</span>
+                    <span>posted in&nbsp;</span> 
+          				  
+          					    <span class="posted-in"><a href='%E5%BC%80%E5%8F%91%E6%8A%80%E6%9C%AF.html'>开发技术</a></span>
+          				   
+                    
+
+                  </div>
+                  <div class="more-right right">
+                  <span class="comments">
+                      
+
+                       
+                  </span>
+                  </div>
+                </div>
+              </div><!-- article -->
+        
+			<div class="article">
                 <a class="clearlink" href="17024690864980.html">
                 
                   <h1>lombok boolean属性缺失get set 方法</h1>
@@ -499,79 +677,6 @@ layouts： 负责使用不同的样式输出日志，即格式化日志</p>
                 </div>
               </div><!-- article -->
         
-			<div class="article">
-                <a class="clearlink" href="ji-shu-bo-ke-mo-banzui-jin-zai.html">
-                
-                  <h1>nginx报错413的解决流程</h1>
-                  <div class="a-content">
-                      
-                      <div class="a-content-text">
-                        
-                        	<p>最近在处理项目问题的时候，遇到了有这么一个有趣的问题，不像其他的报错401、502、500 等，这直接报错了413，这在开发中是常见有不常见的一个状态码，代表着这在使用中有nginx上的问题。</p>
-<h2><a id="1-nginx%E6%8A%A5%E9%94%99413" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>1 nginx报错413</h2>
-<h3><a id="1-1%E9%97%AE%E9%A2%98%E6%98%BE%E7%A4%BA%EF%BC%9A" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>1.1 问题显示：</h3>
-<p>nginx 出现413 Request Entity Too Large<br />
-界面中添加了对应的图纸数据，点击保存，调用更新接口，数据中数据实体过多<br />
-<img src="http://image.redtea.top//imagejava%E5%BC%80%E5%8F%91_nginx%E6%8A%80%E6%9C%AF_%E5%AE%9E%E4%BD%93%E8%BF%87%E5%A4%A7%E9%85%8D%E7%BD%AE%E4%BF%AE%E6%94%B9.png?e=9000000000&amp;token=_pgcTSP3oIupXCcKpdZYLsvKfaaNPV-1PBxNOtDy:hH9V8U9F8Y7L0zcNWjvQ5eYBpq8=" alt="1884d3ce4eabbf13b4476395fb4e469.png" /></p>
-<h3><a id="1-2%E9%97%AE%E9%A2%98%E6%8E%92%E6%9F%A5" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>1.2 问题排查</h3>
-<ul>
-<li>在网页出现错误的时候，首先就是查看请求日志，做问题复现</li>
-<li>查询运行日志</li>
-</ul>
-<h3><a id="1-3%E5%8E%9F%E5%9B%A0" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>1.3 原因</h3>
-<p>nginx在做代理时候，对实际的数据转发有默认的限制，限制大小为1mb，这个可以在配置文件中进行修改</p>
-<h3><a id="1-4%E8%A7%A3%E5%86%B3%E5%8A%9E%E6%B3%95" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>1.4 解决办法</h3>
-<ul>
-<li>找到nginx配置文件 一般默认的路径是在<code>/etc/nginx/nginx.conf</code></li>
-<li>使用vi或者vim命令打开文件进行修改 ，英文模式下，按住i键进入编辑模式</li>
-<li>找到其中的http{}模块，模块中添加<code>client_max_body_size 20m;</code> ,数字可以根据实际情况自定义，esc退出编辑，<code>:wq</code> ，退出保存数据</li>
-<li>重启nginx ,<code>sudo systemctl restart  nginx</code></li>
-</ul>
-<h3><a id="1-5%E9%99%84%E5%BD%95" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>1.5 附录</h3>
-<p>pgsql中查询数据大小：</p>
-<pre class="line-numbers"><code class="language-sql">SELECT id, DATA-&gt;&gt;'name' AS filename , length(DATA::TEXT)/ 1024 AS leMB
-FROM tablename
-WHERE username= 'admin'
-ORDER BY leMB DESC ;
-</code></pre>
-<p>修改参数：<br />
-<img src="http://image.redtea.top//imagejava%E5%BC%80%E5%8F%91_nginx%E6%8A%80%E6%9C%AF_%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E5%A4%A7%E5%B0%8F%E9%99%90%E5%88%B6%E4%BF%AE%E6%94%B9.png?e=9000000000&amp;token=_pgcTSP3oIupXCcKpdZYLsvKfaaNPV-1PBxNOtDy:94lRP8TcZGLTx9Tl9PaStsjmt-s=" alt="5214bac6584a3c894e8bacd41344f0f.png" /></p>
-<h3><a id="%E7%BB%93%E8%AF%AD" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>结语</h3>
-<p>在遇到问题的时候，不着急，先看看报错日志，确定问题的位置，更好的能解决问题。</p>
-<blockquote>
-<p>[!emoji] 欢迎扫码查看更多我的文章</p>
-</blockquote>
-<p><img src="http://image.redtea.top//imageredtea_%E7%BD%91%E7%AB%99%E4%BA%8C%E7%BB%B4%E7%A0%81.png?e=9000000000&amp;token=_pgcTSP3oIupXCcKpdZYLsvKfaaNPV-1PBxNOtDy:8lvuOLe8ONYi6D1EAkyIkAQzyNQ=" alt="" /></p>
-<p>本文作者：redtea 红茶的博客<br />
-本文链接：<a href="https://redtea.top">https://redtea.top</a><br />
-版权声明：本文采用 知识共享署名-非商业性使用-相同方式共享 4.0 国际许可协议 进行许可，非商业转载及引用请注明出处（作者、原文链接），商业转载请联系作者获得授权。</p>
-<p><img src="media/16983209866520/%E6%89%AB%E7%A0%81_%E6%90%9C%E7%B4%A2%E8%81%94%E5%90%88%E4%BC%A0%E6%92%AD%E6%A0%B7%E5%BC%8F-%E6%A0%87%E5%87%86%E8%89%B2%E7%89%88.png" alt="扫码_搜索联合传播样式-标准色版" /></p>
-
-                        
-                      </div>
-                  </div>
-                </a>
-                <div class="read-more clearfix">
-                  <div class="more-left left">
-                  
-                    <span class="date">2023/10/26</span>
-                    <span>posted in&nbsp;</span> 
-          				  
-          					    <span class="posted-in"><a href='%E5%BC%80%E5%8F%91%E6%8A%80%E6%9C%AF.html'>开发技术</a></span>
-          				   
-                    
-
-                  </div>
-                  <div class="more-right right">
-                  <span class="comments">
-                      
-
-                       
-                  </span>
-                  </div>
-                </div>
-              </div><!-- article -->
-        
               
 
 
@@ -645,6 +750,12 @@ ORDER BY leMB DESC ;
 	      
 		      
 			      <li class="post">
+			        <a href="17138506852505.html">python_测试_异步库插件asyncio</a>
+			      </li>
+		     
+		  
+		      
+			      <li class="post">
 			        <a href="17024690864980.html">lombok boolean属性缺失get set 方法</a>
 			      </li>
 		     
@@ -668,10 +779,6 @@ ORDER BY leMB DESC ;
 		     
 		  
 		      
-			      <li class="post">
-			        <a href="16983219658007.html">语雀和速度赛跑的8小时，我们学习到了什么？</a>
-			      </li>
-		     
 		  
 		      
 		  

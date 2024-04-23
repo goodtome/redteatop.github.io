@@ -1,0 +1,660 @@
+<!doctype html>
+<html class="no-js" lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+    
+  python_测试_异步库插件asyncio - 📙红茶的博客
+  
+  </title>
+  
+  
+  <link href="atom.xml" rel="alternate" title="📙红茶的博客" type="application/atom+xml">
+    <link rel="stylesheet" href="asset/css/foundation.min.css" />
+    <link rel="stylesheet" href="asset/css/docs.css" />
+    <script src="asset/js/vendor/modernizr.js"></script>
+    <script src="asset/js/vendor/jquery.js"></script>
+ 
+<script type="text/javascript">
+  function before_search(){
+    var searchVal = 'site:redtea.top ' + document.getElementById('search_input').value;
+    document.getElementById('search_q').value = searchVal;
+    return true;
+  }
+</script>
+  </head>
+  <body class="antialiased hide-extras">
+    
+    <div class="marketing off-canvas-wrap" data-offcanvas>
+      <div class="inner-wrap">
+
+
+<nav class="top-bar docs-bar hide-for-small" data-topbar>
+
+
+  <section class="top-bar-section">
+  <div class="row">
+      <div style="position: relative;width:100%;"><div style="position: absolute; width:100%;">
+        <ul id="main-menu" class="left">
+        
+        <li id=""><a target="_self" href="index.html">Home</a></li>
+        
+        <li id=""><a target="_self" href="archives.html">Archives</a></li>
+        
+        </ul>
+
+        <ul class="right" id="search-wrap">
+          <li>
+<form target="_blank" onsubmit="return before_search();" action="https://google.com/search" method="get">
+    <input type="hidden" id="search_q" name="q" value="" />
+    <input tabindex="1" type="search" id="search_input"  placeholder="Search"/>
+</form>
+</li>
+          </ul>
+      </div></div>
+  </div>
+  </section>
+
+</nav>
+
+        <nav class="tab-bar show-for-small">
+  <a href="javascript:void(0)" class="left-off-canvas-toggle menu-icon">
+    <span> &nbsp; 📙红茶的博客</span>
+  </a>
+</nav>
+
+<aside class="left-off-canvas-menu">
+      <ul class="off-canvas-list">
+        
+        <li><a target="_self" href="index.html">Home</a></li>
+        
+        <li><a target="_self" href="archives.html">Archives</a></li>
+        
+
+    <li><label>Categories</label></li>
+
+        
+            <li><a href="%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8.html">工具使用</a></li>
+        
+            <li><a href="%E5%BC%80%E5%8F%91%E6%8A%80%E6%9C%AF.html">开发技术</a></li>
+        
+            <li><a href="%E6%99%93%E9%A3%8E%E6%97%A5%E8%AE%B0.html">晓风日记</a></li>
+         
+
+      </ul>
+    </aside>
+
+<a class="exit-off-canvas" href="#"></a>
+
+
+        <section id="main-content" role="main" class="scroll-container">
+        
+       
+
+ <script type="text/javascript">
+  $(function(){
+    $('#menu_item_index').addClass('is_active');
+  });
+</script>
+<div class="row">
+  <div class="large-8 medium-8 columns">
+      <div class="markdown-body article-wrap">
+       <div class="article">
+          
+          <h1>python_测试_异步库插件asyncio</h1>
+     
+        <div class="read-more clearfix">
+          <span class="date">2024/04/23</span>
+
+          <span>posted in&nbsp;</span> 
+          
+              <span class="posted-in"><a href='%E5%BC%80%E5%8F%91%E6%8A%80%E6%9C%AF.html'>开发技术</a></span>
+           
+         
+          <span class="comments">
+            
+
+            
+          </span>
+
+        </div>
+      </div><!-- article -->
+
+      <div class="article-content">
+      <p>在python的测试中，如果实际的代码中有异步的代码，如果单纯的调用代码是会出现报错的问题。<br />
+需要在测试代码中添加插件pytest-asyncio,这是一个专注于进行异步测试的pytest的插件。</p>
+<h2><a id="1%E5%AE%89%E8%A3%85" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>1 安装</h2>
+<p>根据官网的连接：<a href="https://pypi.org/project/pytest-asyncio/">pytest-asyncio · PyPI</a><br />
+在终端下载对应的库: <code>$ pip install pytest-asyncio</code><br />
+在测试代码方法上添加注解： <code>@@pytest.mark.asyncio</code></p>
+<h2><a id="2%E4%BD%BF%E7%94%A8" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>2 使用</h2>
+<p>具体的使用办法可以参见以下代码：</p>
+<pre class="line-numbers"><code class="language-python">@pytest.mark.asyncio
+async def test_some_asyncio_code():
+    res = await library.do_something()
+    assert b&quot;expected result&quot; == res
+</code></pre>
+<h2><a id="3%E6%A1%88%E4%BE%8B" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>3 案例</h2>
+<p>在不同的测试场景中，都是能使用到插件的。</p>
+<h3><a id="3-1%E5%9C%A8%E5%90%8C%E4%B8%80%E4%BA%8B%E4%BB%B6-loop%E4%B8%AD%E8%BF%90%E8%A1%8Cclass%E4%B8%AD%E7%9A%84%E6%89%80%E6%9C%89%E6%B5%8B%E8%AF%95" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>3.1 在同一事件loop中运行class中的所有测试</h3>
+<p>所有测试都可以通过使用pytest.mark.asyncio（scope =“ class”）标记在同一事件循环中运行。通过使用Asyncio标记作为类装饰器，可以很容易地实现这一点。</p>
+<pre class="line-numbers"><code class="language-python">import asyncio
+
+import pytest
+
+@pytest.mark.asyncio(scope=&quot;class&quot;)
+class TestInOneEventLoopPerClass:
+    loop: asyncio.AbstractEventLoop
+
+    async def test_remember_loop(self):
+        TestInOneEventLoopPerClass.loop = asyncio.get_running_loop()
+
+    async def test_assert_same_loop(self):
+        assert asyncio.get_running_loop() is TestInOneEventLoopPerClass.loop
+</code></pre>
+<h3><a id="3-2%E5%9C%A8%E5%90%8C%E4%B8%80%E4%BA%8B%E4%BB%B6-loop%E4%B8%AD%E8%BF%90%E8%A1%8Cmodule%E4%B8%AD%E7%9A%84%E6%89%80%E6%9C%89%E6%B5%8B%E8%AF%95" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>3.2 在同一事件loop中运行module中的所有测试</h3>
+<p>所有测试都可以通过使用pytest.mark.asyncio（scope =“ module”）标记在同一事件循环中运行。通过向您的模块添加pytestmark语句可以轻松实现这一点。</p>
+<pre class="line-numbers"><code class="language-python">import asyncio
+
+import pytest
+
+pytestmark = pytest.mark.asyncio(scope=&quot;module&quot;)
+
+loop: asyncio.AbstractEventLoop
+
+async def test_remember_loop():
+    global loop
+    loop = asyncio.get_running_loop()
+
+async def test_assert_same_loop():
+    global loop
+    assert asyncio.get_running_loop() is loop
+
+</code></pre>
+<h3><a id="3-3%E5%9C%A8%E5%90%8C%E4%B8%80%E4%BA%8B%E4%BB%B6-loop%E4%B8%AD%E8%BF%90%E8%A1%8C%E5%8C%85%E8%A3%85%E4%B8%AD%E7%9A%84%E6%89%80%E6%9C%89%E6%B5%8B%E8%AF%95" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>3.3 在同一事件loop中运行包装中的所有测试</h3>
+<p>所有测试都可以通过使用pytest.mark.asyncio（scope =“ package”）标记在同一事件循环中。将以下代码添加到测试包的__init__.py：</p>
+<p>请注意，此标记不会传递给子弹中的测试。子包构成了自己的单独包装。</p>
+<pre class="line-numbers"><code class="language-python">import pytest
+
+pytestmark = pytest.mark.asyncio(scope=&quot;package&quot;)
+</code></pre>
+<h3><a id="3-4%E5%9C%A8%E5%90%8C%E4%B8%80%E4%BA%8B%E4%BB%B6%E5%BE%AA%E7%8E%AF%E4%B8%AD%E8%BF%9B%E8%A1%8C%E4%BC%9A%E8%AF%9D%E4%B8%AD%E7%9A%84%E6%89%80%E6%9C%89%E6%B5%8B%E8%AF%95" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>3.4 在同一事件循环中进行会话中的所有测试</h3>
+<p>所有测试都可以通过使用pytest.mark.asyncio（scope =“ session”）标记在同一事件循环中运行。标记所有测试的最简单方法是通过pytest_collection_modifyitems挂钩在您的测试套件的根文件夹中的conftest.py。</p>
+<pre class="line-numbers"><code class="language-python">import pytest
+
+from pytest_asyncio import is_async_test
+
+def pytest_collection_modifyitems(items):
+    pytest_asyncio_tests = (item for item in items if is_async_test(item))
+    session_scope_marker = pytest.mark.asyncio(scope=&quot;session&quot;)
+    for async_test in pytest_asyncio_tests:
+        async_test.add_marker(session_scope_marker, append=False)
+</code></pre>
+<h3><a id="3-5%E4%BD%BF%E7%94%A8%E4%B8%8D%E5%90%8C%E7%9A%84%E4%BA%8B%E4%BB%B6%E5%BE%AA%E7%8E%AF%E6%B5%8B%E8%AF%95" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>3.5 使用不同的事件循环测试</h3>
+<p>参数化event_loop_policy灯具参数参数所有异步测试。下面的示例会导致所有异步测试多次运行，一次在固定框架参数中为每个事件循环运行：</p>
+<pre class="line-numbers"><code class="language-python">import asyncio
+from asyncio import DefaultEventLoopPolicy
+
+import pytest
+
+class CustomEventLoopPolicy(DefaultEventLoopPolicy):
+    pass
+
+@pytest.fixture(
+    scope=&quot;session&quot;,
+    params=(
+        CustomEventLoopPolicy(),
+        CustomEventLoopPolicy(),
+    ),
+)
+def event_loop_policy(request):
+    return request.param
+
+@pytest.mark.asyncio
+async def test_uses_custom_event_loop_policy():
+    assert isinstance(asyncio.get_event_loop_policy(), CustomEventLoopPolicy)
+</code></pre>
+<h3><a id="3-6-events%E4%BA%8B%E4%BB%B6" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>3.6 events事件</h3>
+<p>参数化event_loop_policy 参数参数所有异步测试。下面的示例会导致所有异步测试多次运行，一次在固定框架参数中为每个事件循环运行：</p>
+<p>如果您只希望测试的一个子集与不同的事件循环一起运行，则可以选择将fixture的范围限制为包、模块或类。</p>
+<pre class="line-numbers"><code class="language-python">import asyncio
+from asyncio import DefaultEventLoopPolicy
+
+import pytest
+
+class CustomEventLoopPolicy(DefaultEventLoopPolicy):
+    pass
+
+@pytest.fixture(
+    scope=&quot;session&quot;,
+    params=(
+        CustomEventLoopPolicy(),
+        CustomEventLoopPolicy(),
+    ),
+)
+def event_loop_policy(request):
+    return request.param
+
+@pytest.mark.asyncio
+async def test_uses_custom_event_loop_policy():
+    assert isinstance(asyncio.get_event_loop_policy(), CustomEventLoopPolicy)
+</code></pre>
+<h3><a id="3-7%E5%A6%82%E4%BD%95%E5%AF%B9-uvloop%E8%BF%9B%E8%A1%8C%E6%B5%8B%E8%AF%95" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>3.7 如何对uvloop进行测试</h3>
+<p>RedeFinig event_loop_policy固定装置将参数所有异步测试。以下示例会导致所有异步测试多次运行，一次在固定夹参数中为每个事件循环进行一次：替换您的conftest.py中的默认事件循环策略：</p>
+<p>如果您只希望使用UVloop运行测试的子集，则可以选择将固定装置的范围限制为包装，模块或类。</p>
+<pre class="line-numbers"><code class="language-python">import pytest
+import uvloop
+
+@pytest.fixture(scope=&quot;session&quot;)
+def event_loop_policy():
+    return uvloop.EventLoopPolicy()
+</code></pre>
+<h3><a id="3-8%E5%A6%82%E4%BD%95%E5%88%A4%E6%96%AD%E5%87%BD%E6%95%B0%E6%98%AF%E4%B8%8D%E6%98%AF%E4%B8%BA%E5%BC%82%E6%AD%A5" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>3.8 如何判断函数是不是为异步</h3>
+<p>使用pytest_asyncio.is_async_item来确定测试项目是否是异步和由pytest-assyncio管理的。</p>
+<pre class="line-numbers"><code class="language-python">from pytest_asyncio import is_async_test
+
+def pytest_collection_modifyitems(items):
+    for item in items:
+        if is_async_test(item):
+            pass
+</code></pre>
+<h2><a id="4%E6%B3%A8%E6%84%8F" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>4 注意</h2>
+<p>这个插件也有自己的问题：<br />
+它不支持标准联合库的测试类。建议用户使用UnitTest.isolatedAsynciotestcase或异步框架（例如异步）。</p>
+<p>本文作者：redtea 红茶的博客<br />
+本文链接：<a href="https://redtea.top/16964281020029.html">https://redtea.top/16964281020029.html</a><br />
+版权声明：本文采用 知识共享署名-非商业性使用-相同方式共享 4.0 国际许可协议 进行许可，非商业转载及引用请注明出处（作者、原文链接），商业转载请联系作者获得授权。</p>
+<p><img src="media/17138506852505/%E6%89%AB%E7%A0%81_%E6%90%9C%E7%B4%A2%E8%81%94%E5%90%88%E4%BC%A0%E6%92%AD%E6%A0%B7%E5%BC%8F-%E6%A0%87%E5%87%86%E8%89%B2%E7%89%88.png" alt="扫码_搜索联合传播样式-标准色版" /></p>
+
+
+    
+
+      </div>
+
+      <div class="row">
+        <div class="large-6 columns">
+        <p class="text-left" style="padding:15px 0px;">
+      
+        </p>
+        </div>
+        <div class="large-6 columns">
+      <p class="text-right" style="padding:15px 0px;">
+      
+          <a  href="17024690864980.html" 
+          title="Next Post: lombok boolean属性缺失get set 方法">lombok boolean属性缺失get set 方法 &raquo;</a>
+      
+      </p>
+        </div>
+      </div>
+      <div class="comments-wrap">
+        <div class="share-comments">
+          
+
+          
+
+          
+        </div>
+      </div>
+    </div><!-- article-wrap -->
+  </div><!-- large 8 -->
+
+
+
+
+ <div class="large-4 medium-4 columns">
+  <div class="hide-for-small">
+    <div id="sidebar" class="sidebar">
+          <div id="site-info" class="site-info">
+            
+                <h1>📙红茶的博客</h1>
+                <div class="site-des"></div>
+                <div class="social">
+
+
+
+
+
+
+
+
+
+
+
+  <a target="_blank" class="rss" href="atom.xml" title="RSS">RSS</a>
+                
+              	 </div>
+          	</div>
+
+             
+
+              <div id="site-categories" class="side-item ">
+                <div class="side-header">
+                  <h2>Categories</h2>
+                </div>
+                <div class="side-content">
+
+      	<p class="cat-list">
+        
+            <a href="%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8.html"><strong>工具使用</strong></a>
+        
+            <a href="%E5%BC%80%E5%8F%91%E6%8A%80%E6%9C%AF.html"><strong>开发技术</strong></a>
+        
+            <a href="%E6%99%93%E9%A3%8E%E6%97%A5%E8%AE%B0.html"><strong>晓风日记</strong></a>
+         
+        </p>
+
+
+                </div>
+              </div>
+
+              <div id="site-categories" class="side-item">
+                <div class="side-header">
+                  <h2>Recent Posts</h2>
+                </div>
+                <div class="side-content">
+                <ul class="posts-list">
+	      
+		      
+			      <li class="post">
+			        <a href="17138506852505.html">python_测试_异步库插件asyncio</a>
+			      </li>
+		     
+		  
+		      
+			      <li class="post">
+			        <a href="17024690864980.html">lombok boolean属性缺失get set 方法</a>
+			      </li>
+		     
+		  
+		      
+			      <li class="post">
+			        <a href="17001950885983.html">Scala语言函数式编程数组转换错误</a>
+			      </li>
+		     
+		  
+		      
+			      <li class="post">
+			        <a href="16996976874415.html">obsidan中附件管理的原则和处理方案</a>
+			      </li>
+		     
+		  
+		      
+			      <li class="post">
+			        <a href="16985062154216.html">asar文件的解压读取</a>
+			      </li>
+		     
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		   
+		  		</ul>
+                </div>
+              </div>
+        </div><!-- sidebar -->
+      </div><!-- hide for small -->
+</div><!-- large 4 -->
+
+</div><!-- row -->
+
+ <div class="page-bottom clearfix">
+  <div class="row">
+   <p class="copyright">Copyright &copy; 2015
+Powered by <a target="_blank" href="http://www.mweb.im">MWeb</a>,&nbsp; 
+Theme used <a target="_blank" href="http://github.com">GitHub CSS</a>.</p>
+  </div>
+</div>
+
+        </section>
+      </div>
+    </div>
+
+
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script type="text/x-mathjax-config">MathJax.Hub.Config({TeX: { equationNumbers: { autoNumber: "AMS" } }});</script>
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script src="asset/prism.js"></script>
+
+
+<style type="text/css">
+figure{margin: 0;padding: 0;}
+figcaption{text-align:center;}
+
+/* PrismJS 1.14.0
+ http://prismjs.com/download.html#themes=prism&languages=markup+css+clike+javascript */
+/**
+ * prism.js default theme for JavaScript, CSS and HTML
+ * Based on dabblet (http://dabblet.com)
+ * @author Lea Verou
+ */
+
+code[class*="language-"],
+pre[class*="language-"] {
+    color: black;
+    background: none;
+    text-shadow: 0 1px white;
+    font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+    text-align: left;
+    white-space: pre;
+    word-spacing: normal;
+    word-break: normal;
+    word-wrap: normal;
+    line-height: 1.5;
+    
+    -moz-tab-size: 4;
+    -o-tab-size: 4;
+    tab-size: 4;
+    
+    -webkit-hyphens: none;
+    -moz-hyphens: none;
+    -ms-hyphens: none;
+    hyphens: none;
+}
+
+pre[class*="language-"]::-moz-selection, pre[class*="language-"] ::-moz-selection,
+code[class*="language-"]::-moz-selection, code[class*="language-"] ::-moz-selection {
+    text-shadow: none;
+    background:#b3d4fc;
+}
+
+pre[class*="language-"]::selection, pre[class*="language-"] ::selection,
+code[class*="language-"]::selection, code[class*="language-"] ::selection {
+    text-shadow: none;
+    background: #b3d4fc;
+}
+
+@media print {
+    code[class*="language-"],
+    pre[class*="language-"] {
+        text-shadow: none;
+    }
+}
+
+/* Code blocks */
+pre[class*="language-"] {
+    padding: 1em;
+    margin: .5em 0;
+    overflow: auto;
+}
+
+:not(pre) > code[class*="language-"],
+pre[class*="language-"] {
+    background: #F7F7F7;
+}
+
+/* Inline code */
+:not(pre) > code[class*="language-"] {
+    padding: .1em;
+    border-radius: .3em;
+    white-space: normal;
+}
+
+.token.comment,
+.token.prolog,
+.token.doctype,
+.token.cdata {
+    color: slategray;
+}
+
+.token.punctuation {
+    color: #999;
+}
+
+.namespace {
+    opacity: .7;
+}
+
+.token.property,
+.token.tag,
+.token.boolean,
+.token.number,
+.token.constant,
+.token.symbol,
+.token.deleted {
+    color: #905;
+}
+
+.token.selector,
+.token.attr-name,
+.token.string,
+.token.char,
+.token.builtin,
+.token.inserted {
+    color: #690;
+}
+
+.token.operator,
+.token.entity,
+.token.url,
+.language-css .token.string,
+.style .token.string {
+    color: #9a6e3a;
+    background: hsla(0, 0%, 100%, .5);
+}
+
+.token.atrule,
+.token.attr-value,
+.token.keyword {
+    color: #07a;
+}
+
+.token.function,
+.token.class-name {
+    color: #DD4A68;
+}
+
+.token.regex,
+.token.important,
+.token.variable {
+    color: #e90;
+}
+
+.token.important,
+.token.bold {
+    font-weight: bold;
+}
+.token.italic {
+    font-style: italic;
+}
+
+.token.entity {
+    cursor: help;
+}
+
+
+pre[class*="language-"].line-numbers {
+    position: relative;
+    padding-left: 3.8em;
+    counter-reset: linenumber;
+}
+
+pre[class*="language-"].line-numbers > code {
+    position: relative;
+    white-space: inherit;
+}
+
+.line-numbers .line-numbers-rows {
+    position: absolute;
+    pointer-events: none;
+    top: 0;
+    font-size: 100%;
+    left: -3.8em;
+    width: 3em; /* works for line-numbers below 1000 lines */
+    letter-spacing: -1px;
+    border-right: 1px solid #999;
+
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+
+}
+
+    .line-numbers-rows > span {
+        pointer-events: none;
+        display: block;
+        counter-increment: linenumber;
+    }
+
+        .line-numbers-rows > span:before {
+            content: counter(linenumber);
+            color: #999;
+            display: block;
+            padding-right: 0.8em;
+            text-align: right;
+        }
+
+</style>
+
+  
+    
+
+    <script src="asset/js/foundation.min.js"></script>
+    <script>
+      $(document).foundation();
+      function fixSidebarHeight(){
+        var w1 = $('.markdown-body').height();
+          var w2 = $('#sidebar').height();
+          if (w1 > w2) { $('#sidebar').height(w1); };
+      }
+      $(function(){
+        fixSidebarHeight();
+      })
+      $(window).load(function(){
+          fixSidebarHeight();
+      });
+     
+    </script>
+
+
+
+  </body>
+</html>
