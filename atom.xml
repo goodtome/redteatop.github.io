@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[红茶的博客]]></title>
-  <link href="http://redtea.top/atom.xml" rel="self"/>
-  <link href="http://redtea.top/"/>
-  <updated>2025-01-13T00:10:24+08:00</updated>
-  <id>http://redtea.top/</id>
+  <link href="redtea.top/atom.xml" rel="self"/>
+  <link href="redtea.top/"/>
+  <updated>2025-01-13T00:13:21+08:00</updated>
+  <id>redtea.top/</id>
   <author>
     <name><![CDATA[]]></name>
     
@@ -14,9 +14,9 @@
   
   <entry>
     <title type="html"><![CDATA[智慧的指引：三则经典语录与个人进步之道]]></title>
-    <link href="http://redtea.top/17366921571661.html"/>
+    <link href="redtea.top/17366921571661.html"/>
     <updated>2025-01-12T22:29:17+08:00</updated>
-    <id>http://redtea.top/17366921571661.html</id>
+    <id>redtea.top/17366921571661.html</id>
     <content type="html"><![CDATA[
 <p>记得在看《穷查理宝典》的时候，有看到这几句话</p>
 <blockquote>
@@ -46,9 +46,9 @@
   
   <entry>
     <title type="html"><![CDATA[python_测试_异步库插件asyncio]]></title>
-    <link href="http://redtea.top/17366909671985.html"/>
+    <link href="redtea.top/17366909671985.html"/>
     <updated>2025-01-12T22:09:27+08:00</updated>
-    <id>http://redtea.top/17366909671985.html</id>
+    <id>redtea.top/17366909671985.html</id>
     <content type="html"><![CDATA[
 <p>在python的测试中，如果实际的代码中有异步的代码，如果单纯的调用代码是会出现报错的问题。<br />
 需要在测试代码中添加插件pytest-asyncio,这是一个专注于进行异步测试的pytest的插件。</p>
@@ -199,9 +199,9 @@ def pytest_collection_modifyitems(items):
   
   <entry>
     <title type="html"><![CDATA[TypeScript的严格语法限制解决方案]]></title>
-    <link href="http://redtea.top/17366924748647.html"/>
+    <link href="redtea.top/17366924748647.html"/>
     <updated>2025-01-12T22:34:34+08:00</updated>
-    <id>http://redtea.top/17366924748647.html</id>
+    <id>redtea.top/17366924748647.html</id>
     <content type="html"><![CDATA[
 <p>在进行vue的开发中，在写ts文件时候，遇到有这么一个报错。经过查阅资料和实际进行解决，问题就是出现在了这个语法的严格造成的。</p>
 <h2><a id="1%E6%8A%A5%E9%94%99" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>1 报错</h2>
@@ -229,9 +229,9 @@ TypeScript 2.7引入了一个新的控制严格性的标记 <code>--strictPrope
   
   <entry>
     <title type="html"><![CDATA[nginx报错413的解决流程]]></title>
-    <link href="http://redtea.top/17366923511122.html"/>
+    <link href="redtea.top/17366923511122.html"/>
     <updated>2025-01-12T22:32:31+08:00</updated>
-    <id>http://redtea.top/17366923511122.html</id>
+    <id>redtea.top/17366923511122.html</id>
     <content type="html"><![CDATA[
 <p>最近在处理项目问题的时候，遇到了有这么一个有趣的问题，不像其他的报错401、502、500 等，这直接报错了413，这在开发中是常见有不常见的一个状态码，代表着这在使用中有nginx上的问题。</p>
 <h2><a id="1-nginx%E6%8A%A5%E9%94%99413" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>1 nginx报错413</h2>
@@ -272,9 +272,9 @@ ORDER BY leMB DESC ;
   
   <entry>
     <title type="html"><![CDATA[基于node.js 和hexo框架搭建博客系统]]></title>
-    <link href="http://redtea.top/17366925472154.html"/>
+    <link href="redtea.top/17366925472154.html"/>
     <updated>2025-01-12T22:35:47+08:00</updated>
-    <id>http://redtea.top/17366925472154.html</id>
+    <id>redtea.top/17366925472154.html</id>
     <content type="html"><![CDATA[
 <p>在搭建系统的部分中，也有一种比较简单的方式去搭建属于自己的博客系统。具体实现部分的如下，使用命令。</p>
 <p>1、下载node的框架，用于做为博客系统的基础<br />
@@ -301,9 +301,9 @@ ORDER BY leMB DESC ;
   
   <entry>
     <title type="html"><![CDATA[语雀和速度赛跑的8小时，我们学习到了什么？]]></title>
-    <link href="http://redtea.top/17366922593174.html"/>
+    <link href="redtea.top/17366922593174.html"/>
     <updated>2025-01-12T22:30:59+08:00</updated>
-    <id>http://redtea.top/17366922593174.html</id>
+    <id>redtea.top/17366922593174.html</id>
     <content type="html"><![CDATA[
 <p>10 月 23 日 14 时左右，蚂蚁集团旗下的在线文档编辑与协同工具语雀发生服务器故障，在线文档和官网目前均无法打开。</p>
 <p>事情虽然已经过去了有几天，现在回过头来看整个事情，梳理这其中的一些关键点，看看哪些是能在其中学习到一些知识的。</p>
@@ -367,9 +367,9 @@ ORDER BY leMB DESC ;
   
   <entry>
     <title type="html"><![CDATA[lombok boolean属性缺失get set 方法]]></title>
-    <link href="http://redtea.top/17366916434096.html"/>
+    <link href="redtea.top/17366916434096.html"/>
     <updated>2025-01-12T22:20:43+08:00</updated>
-    <id>http://redtea.top/17366916434096.html</id>
+    <id>redtea.top/17366916434096.html</id>
     <content type="html"><![CDATA[
 <p>场景：使用<code>Lombok</code>时，发现对于</p>
 <p>解决方案：使用包装类型即可<code>Boolean</code></p>
@@ -394,9 +394,9 @@ ORDER BY leMB DESC ;
   
   <entry>
     <title type="html"><![CDATA[Scala语言函数式编程数组转换错误]]></title>
-    <link href="http://redtea.top/17366917224390.html"/>
+    <link href="redtea.top/17366917224390.html"/>
     <updated>2025-01-12T22:22:02+08:00</updated>
-    <id>http://redtea.top/17366917224390.html</id>
+    <id>redtea.top/17366917224390.html</id>
     <content type="html"><![CDATA[
 <p>在使用scala函数式编程语言写对应的代码的时候，使用数组相关的知识，出现了转换的错误，不能正确输出对应的数组内容。</p>
 <h2><a id="1%E9%97%AE%E9%A2%98%EF%BC%9A" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>1 问题：</h2>
@@ -436,9 +436,9 @@ println(&quot;a17的正常显示数组为：&quot; + stringOf(a17))
   
   <entry>
     <title type="html"><![CDATA[asar文件的解压读取]]></title>
-    <link href="http://redtea.top/17366918709445.html"/>
+    <link href="redtea.top/17366918709445.html"/>
     <updated>2025-01-12T22:24:30+08:00</updated>
-    <id>http://redtea.top/17366918709445.html</id>
+    <id>redtea.top/17366918709445.html</id>
     <content type="html"><![CDATA[
 <p>在实际开发中，有这样子的需求，就是需要解压asar结尾的文件。这里会涉及到两个基础环境的安装，node.js和npm有对应的配置。<br />
 在本次的实验中使用的配置如下：<br />
@@ -477,9 +477,9 @@ asar extract app.asar ./app
   
   <entry>
     <title type="html"><![CDATA[Apache Log4j Java 日志组件详解]]></title>
-    <link href="http://redtea.top/17366923143719.html"/>
+    <link href="redtea.top/17366923143719.html"/>
     <updated>2025-01-12T22:31:54+08:00</updated>
-    <id>http://redtea.top/17366923143719.html</id>
+    <id>redtea.top/17366923143719.html</id>
     <content type="html"><![CDATA[
 <blockquote>
 <p>前言：<br />
@@ -639,9 +639,9 @@ layouts： 负责使用不同的样式输出日志，即格式化日志</p>
   
   <entry>
     <title type="html"><![CDATA[结合mwebpro和GitHub pages的网站发布流程]]></title>
-    <link href="http://redtea.top/17366920207557.html"/>
+    <link href="redtea.top/17366920207557.html"/>
     <updated>2025-01-12T22:27:00+08:00</updated>
-    <id>http://redtea.top/17366920207557.html</id>
+    <id>redtea.top/17366920207557.html</id>
     <content type="html"><![CDATA[
 <p>在实际中有这样的几个需求，能基于一个域名快速的搭建属于自己的网站，有自己的博客。<br />
 最近正好在研究，如何搭建属于自己的一个博客系统，用经济快捷的方式搭建一个属于自己的博客。</p>
@@ -705,9 +705,9 @@ layouts： 负责使用不同的样式输出日志，即格式化日志</p>
   
   <entry>
     <title type="html"><![CDATA[obsidan中附件管理的原则和处理方案]]></title>
-    <link href="http://redtea.top/17366917846698.html"/>
+    <link href="redtea.top/17366917846698.html"/>
     <updated>2025-01-12T22:23:04+08:00</updated>
-    <id>http://redtea.top/17366917846698.html</id>
+    <id>redtea.top/17366917846698.html</id>
     <content type="html"><![CDATA[
 <p>在做笔记的过程中，不可避免的会涉及到图片的分享。是选择将图片直接放在本地，还是将文件通过图床的方式进行分享、本地只存图片连接。</p>
 <p>本文将结合这两种方式，进行分析，说说我自己的看法和实践经验，至少这两种方案都有使用过。</p>
