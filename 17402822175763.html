@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>
     
-  TypeScript的严格语法限制解决方案 - 📙红茶的博客
+  苹果日历使用设置（附上相关数据源） - 📙红茶的博客
   
   </title>
   
@@ -104,14 +104,14 @@
       <div class="markdown-body article-wrap">
        <div class="article">
           
-          <h1>TypeScript的严格语法限制解决方案</h1>
+          <h1>苹果日历使用设置（附上相关数据源）</h1>
      
         <div class="read-more clearfix">
-          <span class="date">2024/02/12</span>
+          <span class="date">2025/02/23</span>
 
           <span>posted in&nbsp;</span> 
           
-              <span class="posted-in"><a href='%E5%BC%80%E5%8F%91%E6%8A%80%E6%9C%AF.html'>开发技术</a></span>
+              <span class="posted-in"><a href='%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8.html'>工具使用</a></span>
            
          
           <span class="comments">
@@ -124,26 +124,22 @@
       </div><!-- article -->
 
       <div class="article-content">
-      <p>在进行vue的开发中，在写ts文件时候，遇到有这么一个报错。经过查阅资料和实际进行解决，问题就是出现在了这个语法的严格造成的。</p>
-<h2><a id="1%E6%8A%A5%E9%94%99" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>1 报错</h2>
-<p>具体报错信息如下:<br />
-<img src="http://image.redtea.top//imagevue%E7%B3%BB%E5%88%97_ts%E8%AF%AD%E6%B3%95%E4%B8%A5%E6%A0%BC%E6%A8%A1%E5%BC%8F%E6%8A%A5%E9%94%99_20231024171652.png?e=9000000000&amp;token=_pgcTSP3oIupXCcKpdZYLsvKfaaNPV-1PBxNOtDy:0fLhfo1v8bhB3Jx4noi1L9MZQ4s=" alt="image.png" /></p>
-<h2><a id="2%E7%BC%98%E7%94%B1" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>2 缘由</h2>
-<p>更严格的类属性检查<br />
-TypeScript 2.7引入了一个新的控制严格性的标记 <code>--strictPropertyInitialization</code></p>
-<p>使用这个标记会确保类的每个实例属性都会在构造函数里或使用属性初始化器赋值。 在某种意义上，它会明确地进行从变量到类的实例属性的赋值检查</p>
-<h2><a id="3%E8%A7%A3%E5%86%B3%E5%8A%9E%E6%B3%95" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>3 解决办法</h2>
-<p>找到文件中的tsconfig.json配置文件，增加或者修改配置 将严格初始初始化属性去掉<br />
- <code>&quot;strictPropertyInitialization&quot;: false,</code></p>
-<p><img src="http://image.redtea.top//imagevue%E7%B3%BB%E5%88%97_vueTS%E4%B8%A5%E6%A0%BC%E8%AF%AD%E6%B3%95_20231024171420.png?e=9000000000&amp;token=_pgcTSP3oIupXCcKpdZYLsvKfaaNPV-1PBxNOtDy:jrrUiF8qqMMpyVDi1qvLL1x27Gw=" alt="image.png" /></p>
-<p>参考链接 ：</p>
-<ul>
-<li><a href="https://juejin.cn/post/7068542157967065119">探索TypeScript中的高级编译器选项 - 掘金</a></li>
-<li><a href="https://www.tslang.cn/docs/release-notes/typescript-2.7.html">TypeScript 2.7 · TypeScript中文网 · TypeScript——JavaScript的超集</a></li>
-</ul>
-<p>本文作者：redtea 红茶的博客<br />
-本文链接：<a href="https://redtea.top/16964281020029.html">https://redtea.top/16964281020029.html</a><br />
-版权声明：本文采用 知识共享署名-非商业性使用-相同方式共享 4.0 国际许可协议 进行许可，非商业转载及引用请注明出处（作者、原文链接），商业转载请联系作者获得授权。</p>
+      <h2><a id="%E8%AE%BE%E7%BD%AE%E4%BD%8D%E7%BD%AE" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>设置位置</h2>
+<p>Mac：打开 日历-&gt;文件-&gt;新建日历订阅<br />
+iPhone：系统设置-&gt;密码与账户-&gt;添加账户-&gt;其他-&gt;添加已订阅的日历</p>
+<h2><a id="%E8%AE%A2%E9%98%85%E6%BA%90%E4%BF%A1%E6%81%AF%EF%BC%9A" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>订阅源信息：</h2>
+<p>中国法定节假日：<br />
+https://<a href="https://so.csdn.net/so/search?q=calendar&amp;spm=1001.2101.3001.7020">calendar</a>.google.com/calendar/ical/pmbvm6f01ijruokq0spqa854u2ra71gt%40import.calendar.google.com/public/basic.ics</p>
+<p>24节气订阅地址：<br />
+<a href="https://github.com/KaitoHH/24-jieqi-ics">https://github.com/KaitoHH/24-jieqi-ics</a></p>
+<blockquote>
+<p><a href="https://raw.githubusercontent.com/KaitoHH/24-jieqi-ics/master/23_solar_terms_2015-01-01_2050-12-31.ics">https://raw.githubusercontent.com/KaitoHH/24-jieqi-ics/master/23_solar_terms_2015-01-01_2050-12-31.ics</a></p>
+</blockquote>
+<p>中国节假日补班日历：<br />
+<a href="https://github.com/lanceliao/china-holiday-calender">https://github.com/lanceliao/china-holiday-calender</a></p>
+<p>老黄历：<br />
+<a href="https://github.com/zqzess/holiday-and-chinese-almanac-calendar?tab=readme-ov-file">https://github.com/zqzess/holiday-and-chinese-almanac-calendar?tab=readme-ov-file</a></p>
+<p><a href="https://raw.githubusercontent.com/zqzess/holiday-and-chinese-almanac-calendar/main/holidays_calendar_2.ics">https://raw.githubusercontent.com/zqzess/holiday-and-chinese-almanac-calendar/main/holidays_calendar_2.ics</a></p>
 
 
     
@@ -154,16 +150,16 @@ TypeScript 2.7引入了一个新的控制严格性的标记 <code>--strictPrope
         <div class="large-6 columns">
         <p class="text-left" style="padding:15px 0px;">
       
-          <a href="17366909671985.html" 
-          title="Previous Post: python_测试_异步库插件asyncio">&laquo; python_测试_异步库插件asyncio</a>
+          <a href="17431177984307.html" 
+          title="Previous Post: 20250327">&laquo; 20250327</a>
       
         </p>
         </div>
         <div class="large-6 columns">
       <p class="text-right" style="padding:15px 0px;">
       
-          <a  href="17366923511122.html" 
-          title="Next Post: nginx报错413的解决流程">nginx报错413的解决流程 &raquo;</a>
+          <a  href="17367394795351.html" 
+          title="Next Post: 回忆不散：QQ空间导出助手，保存你的青春记忆">回忆不散：QQ空间导出助手，保存你的青春记忆 &raquo;</a>
       
       </p>
         </div>
@@ -309,7 +305,6 @@ Theme used <a target="_blank" href="http://github.com">GitHub CSS</a>.</p>
       </div>
     </div>
 
-<script>(n=>{"use strict";let s,r,e;const l=["cdn.jsdelivr.net","fastly.jsdelivr.net","gcore.jsdelivr.net","cdn.zenless.top","testingcf.jsdelivr.net"],t="//",i=l[0],o=Date.now(),a=2e3,c="jsdelivr-auto-fallback",f="/gh/PipecraftNet/jsdelivr-auto-fallback@main/empty.css?",d=e=>e&&e.includes(t+i),m=e=>e.replace(t+i,t+s),u=window.setTimeout,v=n.querySelectorAll.bind(n),b=()=>{let e,t;for(e of v('link[rel="stylesheet"]'))t=e.href,d(t)&&!t.includes(f)&&(e.href=m(t));for(e of v("script"))if(t=e.src,d(t)){const s=n.createElement("script");s.src=m(t),e.defer=!0,e.src="",e.before(s),e.remove()}for(e of v("img"))t=e.src,d(t)&&(e.src="",e.src=m(t));for(e of v("*[style]"))t=e.getAttribute("style"),d(t)&&e.setAttribute("style",m(t));for(e of v("style"))t=e.innerHTML,d(t)&&(e.innerHTML=m(t))},h=()=>{!e&&r&&s&&(console.warn(i+" is not available. Use "+s),e=!0,u(b,0),u(b,20),setInterval(b,500))},g=(()=>{try{return Object.assign({},JSON.parse(localStorage.getItem(c)||"{}"))}catch{return{}}})(),y=()=>{g.time=o,g.failed=!1,g.fastNode=null;for(const t of l)((e,t)=>{let s;const r=n.createElement("link"),l=e=>{s&&(clearTimeout(s),s=0,e||(r.href="data:text/css;base64,"),r.remove(),t(e))};s=u(l,a),r.addEventListener("error",()=>l(!1)),r.addEventListener("load",()=>l(!0)),r.rel="stylesheet",r.text="text/css",r.href=e+f+o,n.head.insertAdjacentElement("afterbegin",r)})("https://"+t,e=>{e||t!==i||(r=!0,g.failed=!0),e&&!s&&(s=t),e&&!g.fastNode&&(g.fastNode=t),h()});u(()=>{r&&!s&&(s=l[1],h()),localStorage.setItem(c,JSON.stringify(g))},a+100)};if(g.time&&o-g.time<36e5&&g.failed&&g.fastNode)r=!0,s=g.fastNode,h(),u(y,1e3);else if(n.head)y();else{const j=new MutationObserver(()=>{n.head&&(j.disconnect(),y())});j.observe(n,{childList:!0,subtree:!0})}})(document);</script>
 <style>.mweb-charts{background:#fff;}
 body{ box-sizing: border-box;
     margin: 0 auto;}
@@ -392,7 +387,7 @@ div.code-toolbar > .toolbar > .toolbar-item > span:focus {
   color: inherit;
   text-decoration: none;
 }
-</style><script>window.MathJax = {     tex: { tags: 'ams', displayMath: [ ['\\[', '\\]'] ] } ,     startup: {     pageReady() {       return MathJax.startup.defaultPageReady().then(function () {          window.mweb_mathjax_ready_val = 'yes';          if(window.mweb_mathjax_ready !== undefined){ mweb_mathjax_ready(); }       });     }   }};document.addEventListener('DOMContentLoaded', function(event) {    if (typeof Prism != 'undefined') {         Prism.highlightAll();     }});window.mweb_mathjax_ready_val = '';function theMWebMathJaxRenderIsReady(key){ return window.mweb_mathjax_ready_val; }</script><script>window.MathJax = { tex: { tags: 'ams', displayMath: [ ['\\[', '\\]'] ] } }; </script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js"></script>
+</style>
 
 <style type="text/css">
 figure{margin: 0;padding: 0;}
