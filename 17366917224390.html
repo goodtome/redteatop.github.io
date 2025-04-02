@@ -38,9 +38,9 @@
       <div style="position: relative;width:100%;"><div style="position: absolute; width:100%;">
         <ul id="main-menu" class="left">
         
-        <li id=""><a target="_self" href="index.html">Home</a></li>
+        <li id=""><a target="_self" href="index.html">首页</a></li>
         
-        <li id=""><a target="_self" href="archives.html">Archives</a></li>
+        <li id=""><a target="_self" href="archives.html">更新活动</a></li>
         
         </ul>
 
@@ -67,9 +67,9 @@
 <aside class="left-off-canvas-menu">
       <ul class="off-canvas-list">
         
-        <li><a target="_self" href="index.html">Home</a></li>
+        <li><a target="_self" href="index.html">首页</a></li>
         
-        <li><a target="_self" href="archives.html">Archives</a></li>
+        <li><a target="_self" href="archives.html">更新活动</a></li>
         
 
     <li><label>Categories</label></li>
@@ -129,7 +129,7 @@
       <p>在使用scala函数式编程语言写对应的代码的时候，使用数组相关的知识，出现了转换的错误，不能正确输出对应的数组内容。</p>
 <h2><a id="1%E9%97%AE%E9%A2%98%EF%BC%9A" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>1 问题：</h2>
 <p>代码：</p>
-<pre><code class="language-scala">//多维数组  
+<pre class="line-numbers"><code class="language-scala">//多维数组  
 val a17 = Array.ofDim[String](2, 2)  
 for (i &lt;- 0 to 1) {  
   for (j &lt;- 0 to 1) {  
@@ -143,7 +143,7 @@ println(&quot;a17的正常显示数组为：&quot; + stringOf(a17))
 <p>输出的结果是：<br />
 <code>a17多维数组是：[[Ljava.lang.String;@77b52d12</code><br />
 对这个结果的解释是：</p>
-<pre><code class="language-plain_text">“[” 表示一维数组  
+<pre class="line-numbers"><code class="language-plain_text">“[” 表示一维数组  
 &quot;[[&quot;表示二维数组  
 &quot;L&quot;表示一个对象  
 &quot;java.lang.String&quot;表示对象的类型  

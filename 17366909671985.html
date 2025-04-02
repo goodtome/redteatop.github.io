@@ -38,9 +38,9 @@
       <div style="position: relative;width:100%;"><div style="position: absolute; width:100%;">
         <ul id="main-menu" class="left">
         
-        <li id=""><a target="_self" href="index.html">Home</a></li>
+        <li id=""><a target="_self" href="index.html">首页</a></li>
         
-        <li id=""><a target="_self" href="archives.html">Archives</a></li>
+        <li id=""><a target="_self" href="archives.html">更新活动</a></li>
         
         </ul>
 
@@ -67,9 +67,9 @@
 <aside class="left-off-canvas-menu">
       <ul class="off-canvas-list">
         
-        <li><a target="_self" href="index.html">Home</a></li>
+        <li><a target="_self" href="index.html">首页</a></li>
         
-        <li><a target="_self" href="archives.html">Archives</a></li>
+        <li><a target="_self" href="archives.html">更新活动</a></li>
         
 
     <li><label>Categories</label></li>
@@ -134,7 +134,7 @@
 在测试代码方法上添加注解： <code>@@pytest.mark.asyncio</code></p>
 <h2><a id="2%E4%BD%BF%E7%94%A8" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>2 使用</h2>
 <p>具体的使用办法可以参见以下代码：</p>
-<pre><code class="language-python">@pytest.mark.asyncio
+<pre class="line-numbers"><code class="language-python">@pytest.mark.asyncio
 async def test_some_asyncio_code():
     res = await library.do_something()
     assert b&quot;expected result&quot; == res
@@ -143,7 +143,7 @@ async def test_some_asyncio_code():
 <p>在不同的测试场景中，都是能使用到插件的。</p>
 <h3><a id="3-1%E5%9C%A8%E5%90%8C%E4%B8%80%E4%BA%8B%E4%BB%B6-loop%E4%B8%AD%E8%BF%90%E8%A1%8Cclass%E4%B8%AD%E7%9A%84%E6%89%80%E6%9C%89%E6%B5%8B%E8%AF%95" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>3.1 在同一事件loop中运行class中的所有测试</h3>
 <p>所有测试都可以通过使用pytest.mark.asyncio（scope =“ class”）标记在同一事件循环中运行。通过使用Asyncio标记作为类装饰器，可以很容易地实现这一点。</p>
-<pre><code class="language-python">import asyncio
+<pre class="line-numbers"><code class="language-python">import asyncio
 
 import pytest
 
@@ -159,7 +159,7 @@ class TestInOneEventLoopPerClass:
 </code></pre>
 <h3><a id="3-2%E5%9C%A8%E5%90%8C%E4%B8%80%E4%BA%8B%E4%BB%B6-loop%E4%B8%AD%E8%BF%90%E8%A1%8Cmodule%E4%B8%AD%E7%9A%84%E6%89%80%E6%9C%89%E6%B5%8B%E8%AF%95" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>3.2 在同一事件loop中运行module中的所有测试</h3>
 <p>所有测试都可以通过使用pytest.mark.asyncio（scope =“ module”）标记在同一事件循环中运行。通过向您的模块添加pytestmark语句可以轻松实现这一点。</p>
-<pre><code class="language-python">import asyncio
+<pre class="line-numbers"><code class="language-python">import asyncio
 
 import pytest
 
@@ -179,13 +179,13 @@ async def test_assert_same_loop():
 <h3><a id="3-3%E5%9C%A8%E5%90%8C%E4%B8%80%E4%BA%8B%E4%BB%B6-loop%E4%B8%AD%E8%BF%90%E8%A1%8C%E5%8C%85%E8%A3%85%E4%B8%AD%E7%9A%84%E6%89%80%E6%9C%89%E6%B5%8B%E8%AF%95" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>3.3 在同一事件loop中运行包装中的所有测试</h3>
 <p>所有测试都可以通过使用pytest.mark.asyncio（scope =“ package”）标记在同一事件循环中。将以下代码添加到测试包的__init__.py：</p>
 <p>请注意，此标记不会传递给子弹中的测试。子包构成了自己的单独包装。</p>
-<pre><code class="language-python">import pytest
+<pre class="line-numbers"><code class="language-python">import pytest
 
 pytestmark = pytest.mark.asyncio(scope=&quot;package&quot;)
 </code></pre>
 <h3><a id="3-4%E5%9C%A8%E5%90%8C%E4%B8%80%E4%BA%8B%E4%BB%B6%E5%BE%AA%E7%8E%AF%E4%B8%AD%E8%BF%9B%E8%A1%8C%E4%BC%9A%E8%AF%9D%E4%B8%AD%E7%9A%84%E6%89%80%E6%9C%89%E6%B5%8B%E8%AF%95" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>3.4 在同一事件循环中进行会话中的所有测试</h3>
 <p>所有测试都可以通过使用pytest.mark.asyncio（scope =“ session”）标记在同一事件循环中运行。标记所有测试的最简单方法是通过pytest_collection_modifyitems挂钩在您的测试套件的根文件夹中的conftest.py。</p>
-<pre><code class="language-python">import pytest
+<pre class="line-numbers"><code class="language-python">import pytest
 
 from pytest_asyncio import is_async_test
 
@@ -197,7 +197,7 @@ def pytest_collection_modifyitems(items):
 </code></pre>
 <h3><a id="3-5%E4%BD%BF%E7%94%A8%E4%B8%8D%E5%90%8C%E7%9A%84%E4%BA%8B%E4%BB%B6%E5%BE%AA%E7%8E%AF%E6%B5%8B%E8%AF%95" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>3.5 使用不同的事件循环测试</h3>
 <p>参数化event_loop_policy灯具参数参数所有异步测试。下面的示例会导致所有异步测试多次运行，一次在固定框架参数中为每个事件循环运行：</p>
-<pre><code class="language-python">import asyncio
+<pre class="line-numbers"><code class="language-python">import asyncio
 from asyncio import DefaultEventLoopPolicy
 
 import pytest
@@ -222,7 +222,7 @@ async def test_uses_custom_event_loop_policy():
 <h3><a id="3-6-events%E4%BA%8B%E4%BB%B6" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>3.6 events事件</h3>
 <p>参数化event_loop_policy 参数参数所有异步测试。下面的示例会导致所有异步测试多次运行，一次在固定框架参数中为每个事件循环运行：</p>
 <p>如果您只希望测试的一个子集与不同的事件循环一起运行，则可以选择将fixture的范围限制为包、模块或类。</p>
-<pre><code class="language-python">import asyncio
+<pre class="line-numbers"><code class="language-python">import asyncio
 from asyncio import DefaultEventLoopPolicy
 
 import pytest
@@ -247,7 +247,7 @@ async def test_uses_custom_event_loop_policy():
 <h3><a id="3-7%E5%A6%82%E4%BD%95%E5%AF%B9-uvloop%E8%BF%9B%E8%A1%8C%E6%B5%8B%E8%AF%95" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>3.7 如何对uvloop进行测试</h3>
 <p>RedeFinig event_loop_policy固定装置将参数所有异步测试。以下示例会导致所有异步测试多次运行，一次在固定夹参数中为每个事件循环进行一次：替换您的conftest.py中的默认事件循环策略：</p>
 <p>如果您只希望使用UVloop运行测试的子集，则可以选择将固定装置的范围限制为包装，模块或类。</p>
-<pre><code class="language-python">import pytest
+<pre class="line-numbers"><code class="language-python">import pytest
 import uvloop
 
 @pytest.fixture(scope=&quot;session&quot;)
@@ -256,7 +256,7 @@ def event_loop_policy():
 </code></pre>
 <h3><a id="3-8%E5%A6%82%E4%BD%95%E5%88%A4%E6%96%AD%E5%87%BD%E6%95%B0%E6%98%AF%E4%B8%8D%E6%98%AF%E4%B8%BA%E5%BC%82%E6%AD%A5" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>3.8 如何判断函数是不是为异步</h3>
 <p>使用pytest_asyncio.is_async_item来确定测试项目是否是异步和由pytest-assyncio管理的。</p>
-<pre><code class="language-python">from pytest_asyncio import is_async_test
+<pre class="line-numbers"><code class="language-python">from pytest_asyncio import is_async_test
 
 def pytest_collection_modifyitems(items):
     for item in items:

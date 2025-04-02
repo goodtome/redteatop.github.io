@@ -4,7 +4,7 @@
   <title><![CDATA[📙红茶的博客]]></title>
   <link href="redtea.top/atom.xml" rel="self"/>
   <link href="redtea.top/"/>
-  <updated>2025-04-02T01:14:46+08:00</updated>
+  <updated>2025-04-02T13:21:12+08:00</updated>
   <id>redtea.top/</id>
   <author>
     <name><![CDATA[]]></name>
@@ -12,6 +12,11 @@
   </author>
   <generator uri="http://www.mweb.im/">MWeb</generator>
   
+<follow_challenge>
+    <feedId>96580351742716928</feedId>
+    <userId>60934240081712128</userId>
+</follow_challenge>
+
   <entry>
     <title type="html"><![CDATA[20250401]]></title>
     <link href="redtea.top/17435273009795.html"/>
@@ -251,7 +256,7 @@ https://<a href="https://so.csdn.net/so/search?q=calendar&amp;spm=1001.2101.3001
 在测试代码方法上添加注解： <code>@@pytest.mark.asyncio</code></p>
 <h2><a id="2%E4%BD%BF%E7%94%A8" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>2 使用</h2>
 <p>具体的使用办法可以参见以下代码：</p>
-<pre><code class="language-python">@pytest.mark.asyncio
+<pre class="line-numbers"><code class="language-python">@pytest.mark.asyncio
 async def test_some_asyncio_code():
     res = await library.do_something()
     assert b&quot;expected result&quot; == res
@@ -260,7 +265,7 @@ async def test_some_asyncio_code():
 <p>在不同的测试场景中，都是能使用到插件的。</p>
 <h3><a id="3-1%E5%9C%A8%E5%90%8C%E4%B8%80%E4%BA%8B%E4%BB%B6-loop%E4%B8%AD%E8%BF%90%E8%A1%8Cclass%E4%B8%AD%E7%9A%84%E6%89%80%E6%9C%89%E6%B5%8B%E8%AF%95" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>3.1 在同一事件loop中运行class中的所有测试</h3>
 <p>所有测试都可以通过使用pytest.mark.asyncio（scope =“ class”）标记在同一事件循环中运行。通过使用Asyncio标记作为类装饰器，可以很容易地实现这一点。</p>
-<pre><code class="language-python">import asyncio
+<pre class="line-numbers"><code class="language-python">import asyncio
 
 import pytest
 
@@ -276,7 +281,7 @@ class TestInOneEventLoopPerClass:
 </code></pre>
 <h3><a id="3-2%E5%9C%A8%E5%90%8C%E4%B8%80%E4%BA%8B%E4%BB%B6-loop%E4%B8%AD%E8%BF%90%E8%A1%8Cmodule%E4%B8%AD%E7%9A%84%E6%89%80%E6%9C%89%E6%B5%8B%E8%AF%95" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>3.2 在同一事件loop中运行module中的所有测试</h3>
 <p>所有测试都可以通过使用pytest.mark.asyncio（scope =“ module”）标记在同一事件循环中运行。通过向您的模块添加pytestmark语句可以轻松实现这一点。</p>
-<pre><code class="language-python">import asyncio
+<pre class="line-numbers"><code class="language-python">import asyncio
 
 import pytest
 
@@ -296,13 +301,13 @@ async def test_assert_same_loop():
 <h3><a id="3-3%E5%9C%A8%E5%90%8C%E4%B8%80%E4%BA%8B%E4%BB%B6-loop%E4%B8%AD%E8%BF%90%E8%A1%8C%E5%8C%85%E8%A3%85%E4%B8%AD%E7%9A%84%E6%89%80%E6%9C%89%E6%B5%8B%E8%AF%95" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>3.3 在同一事件loop中运行包装中的所有测试</h3>
 <p>所有测试都可以通过使用pytest.mark.asyncio（scope =“ package”）标记在同一事件循环中。将以下代码添加到测试包的__init__.py：</p>
 <p>请注意，此标记不会传递给子弹中的测试。子包构成了自己的单独包装。</p>
-<pre><code class="language-python">import pytest
+<pre class="line-numbers"><code class="language-python">import pytest
 
 pytestmark = pytest.mark.asyncio(scope=&quot;package&quot;)
 </code></pre>
 <h3><a id="3-4%E5%9C%A8%E5%90%8C%E4%B8%80%E4%BA%8B%E4%BB%B6%E5%BE%AA%E7%8E%AF%E4%B8%AD%E8%BF%9B%E8%A1%8C%E4%BC%9A%E8%AF%9D%E4%B8%AD%E7%9A%84%E6%89%80%E6%9C%89%E6%B5%8B%E8%AF%95" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>3.4 在同一事件循环中进行会话中的所有测试</h3>
 <p>所有测试都可以通过使用pytest.mark.asyncio（scope =“ session”）标记在同一事件循环中运行。标记所有测试的最简单方法是通过pytest_collection_modifyitems挂钩在您的测试套件的根文件夹中的conftest.py。</p>
-<pre><code class="language-python">import pytest
+<pre class="line-numbers"><code class="language-python">import pytest
 
 from pytest_asyncio import is_async_test
 
@@ -314,7 +319,7 @@ def pytest_collection_modifyitems(items):
 </code></pre>
 <h3><a id="3-5%E4%BD%BF%E7%94%A8%E4%B8%8D%E5%90%8C%E7%9A%84%E4%BA%8B%E4%BB%B6%E5%BE%AA%E7%8E%AF%E6%B5%8B%E8%AF%95" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>3.5 使用不同的事件循环测试</h3>
 <p>参数化event_loop_policy灯具参数参数所有异步测试。下面的示例会导致所有异步测试多次运行，一次在固定框架参数中为每个事件循环运行：</p>
-<pre><code class="language-python">import asyncio
+<pre class="line-numbers"><code class="language-python">import asyncio
 from asyncio import DefaultEventLoopPolicy
 
 import pytest
@@ -339,7 +344,7 @@ async def test_uses_custom_event_loop_policy():
 <h3><a id="3-6-events%E4%BA%8B%E4%BB%B6" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>3.6 events事件</h3>
 <p>参数化event_loop_policy 参数参数所有异步测试。下面的示例会导致所有异步测试多次运行，一次在固定框架参数中为每个事件循环运行：</p>
 <p>如果您只希望测试的一个子集与不同的事件循环一起运行，则可以选择将fixture的范围限制为包、模块或类。</p>
-<pre><code class="language-python">import asyncio
+<pre class="line-numbers"><code class="language-python">import asyncio
 from asyncio import DefaultEventLoopPolicy
 
 import pytest
@@ -364,7 +369,7 @@ async def test_uses_custom_event_loop_policy():
 <h3><a id="3-7%E5%A6%82%E4%BD%95%E5%AF%B9-uvloop%E8%BF%9B%E8%A1%8C%E6%B5%8B%E8%AF%95" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>3.7 如何对uvloop进行测试</h3>
 <p>RedeFinig event_loop_policy固定装置将参数所有异步测试。以下示例会导致所有异步测试多次运行，一次在固定夹参数中为每个事件循环进行一次：替换您的conftest.py中的默认事件循环策略：</p>
 <p>如果您只希望使用UVloop运行测试的子集，则可以选择将固定装置的范围限制为包装，模块或类。</p>
-<pre><code class="language-python">import pytest
+<pre class="line-numbers"><code class="language-python">import pytest
 import uvloop
 
 @pytest.fixture(scope=&quot;session&quot;)
@@ -373,7 +378,7 @@ def event_loop_policy():
 </code></pre>
 <h3><a id="3-8%E5%A6%82%E4%BD%95%E5%88%A4%E6%96%AD%E5%87%BD%E6%95%B0%E6%98%AF%E4%B8%8D%E6%98%AF%E4%B8%BA%E5%BC%82%E6%AD%A5" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>3.8 如何判断函数是不是为异步</h3>
 <p>使用pytest_asyncio.is_async_item来确定测试项目是否是异步和由pytest-assyncio管理的。</p>
-<pre><code class="language-python">from pytest_asyncio import is_async_test
+<pre class="line-numbers"><code class="language-python">from pytest_asyncio import is_async_test
 
 def pytest_collection_modifyitems(items):
     for item in items:
@@ -447,7 +452,7 @@ TypeScript 2.7引入了一个新的控制严格性的标记 <code>--strictPrope
 </ul>
 <h3><a id="1-5%E9%99%84%E5%BD%95" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>1.5 附录</h3>
 <p>pgsql中查询数据大小：</p>
-<pre><code class="language-sql">SELECT id, DATA-&gt;&gt;'name' AS filename , length(DATA::TEXT)/ 1024 AS leMB
+<pre class="line-numbers"><code class="language-sql">SELECT id, DATA-&gt;&gt;'name' AS filename , length(DATA::TEXT)/ 1024 AS leMB
 FROM tablename
 WHERE username= 'admin'
 ORDER BY leMB DESC ;
@@ -473,10 +478,10 @@ ORDER BY leMB DESC ;
 <p>1、下载node的框架，用于做为博客系统的基础<br />
 <code>npm install node.js</code> </p>
 <p>2、切换下载源，使用指向淘宝镜像</p>
-<pre><code class="language-linux">npm install -g cnpm --registry=http://registry.npm.taobao.org```
+<pre class="line-numbers"><code class="language-linux">npm install -g cnpm --registry=http://registry.npm.taobao.org```
 </code></pre>
 <p>3、下载博客框架hexo</p>
-<pre><code class="language-plain_text">cnpm install -g hexo-cli
+<pre class="line-numbers"><code class="language-plain_text">cnpm install -g hexo-cli
 </code></pre>
 <p>4、建博客的文件路径<br />
 /Users/tom 目录下 使用命令 <code>mkdir blog</code></p>
@@ -519,7 +524,7 @@ ORDER BY leMB DESC ;
 <p>这次的宕机，给作为技术人员，运营人员，以及个人都会有不同的思考。<br />
 在技术上的具体宕机的细节，其实外人无从知晓，不过从故障的公告中，能看到语雀团队在技术上的一些细节。<br />
 以下是关于语雀公告中提及到的他们的解决方案：</p>
-<pre><code class="language-plain_text">1、升级硬件版本和机型，实现离线后的快速上线。该措施在本次故障修复中已完成；
+<pre class="line-numbers"><code class="language-plain_text">1、升级硬件版本和机型，实现离线后的快速上线。该措施在本次故障修复中已完成；
 2、运维团队加强运维工具的质量保障与测试，杜绝此类运维 bug 再次发生；
 3、缩小运维动作灰度范围，增加灰度时间，提前发现 bug；
 4、从架构和高可用层面改进服务，为语雀增加存储系统的异地灾备。
@@ -594,7 +599,7 @@ ORDER BY leMB DESC ;
 <p>在使用scala函数式编程语言写对应的代码的时候，使用数组相关的知识，出现了转换的错误，不能正确输出对应的数组内容。</p>
 <h2><a id="1%E9%97%AE%E9%A2%98%EF%BC%9A" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>1 问题：</h2>
 <p>代码：</p>
-<pre><code class="language-scala">//多维数组  
+<pre class="line-numbers"><code class="language-scala">//多维数组  
 val a17 = Array.ofDim[String](2, 2)  
 for (i &lt;- 0 to 1) {  
   for (j &lt;- 0 to 1) {  
@@ -608,7 +613,7 @@ println(&quot;a17的正常显示数组为：&quot; + stringOf(a17))
 <p>输出的结果是：<br />
 <code>a17多维数组是：[[Ljava.lang.String;@77b52d12</code><br />
 对这个结果的解释是：</p>
-<pre><code class="language-plain_text">“[” 表示一维数组  
+<pre class="line-numbers"><code class="language-plain_text">“[” 表示一维数组  
 &quot;[[&quot;表示二维数组  
 &quot;L&quot;表示一个对象  
 &quot;java.lang.String&quot;表示对象的类型  
@@ -640,7 +645,7 @@ npm版本：10.0.1</p>
 <h2><a id="1%E7%BD%91%E4%B8%8A%E6%95%99%E7%A8%8B" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>1 网上教程</h2>
 <p>app.asar文件是Electron加密打包时的中间产物，electron.exe调用resources文件夹下的app.asar从而实现不用解压缩而直接读取文件内容的高效。</p>
 <p>在网上的一些教程中，对asar文件的解压和打包主要是执行以下命令：</p>
-<pre><code class="language-plain_text">1、安装asar 
+<pre class="line-numbers"><code class="language-plain_text">1、安装asar 
 npm install -g asar
 2、cmd窗口中解压文件
 asar extract app.asar ./app
@@ -649,11 +654,11 @@ asar extract app.asar ./app
 </code></pre>
 <h2><a id="2%E6%8A%A5%E9%94%99%E6%8F%90%E7%A4%BA" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>2 报错提示</h2>
 <p>执行安装命令中，实际会报错以下消息：</p>
-<pre><code class="language-plain_text">npm WARN deprecated asar@3.2.0: Please use @electron/asar moving forward. There is no API change, just a package name change
+<pre class="line-numbers"><code class="language-plain_text">npm WARN deprecated asar@3.2.0: Please use @electron/asar moving forward. There is no API change, just a package name change
 </code></pre>
 <p>原因是在新版本的框架中，已经有包含了asar的支持，不需要在额外下载对应的模块，只需要更更换执行的命令即可。</p>
 <p>根据警告消息所示，官方建议改用 @electron/asar。这是一个针对 Electron 应用程序中的数据和文件管理的模块，它支持读取和打包应用内的文件，可以在命令行中使用。 您可以按照下面的步骤来更新 asar 版本：</p>
-<pre><code class="language-plain_text">1. 卸载旧版 asar： `npm uninstall asar`
+<pre class="line-numbers"><code class="language-plain_text">1. 卸载旧版 asar： `npm uninstall asar`
 2. 安装新版 @electron/asar： `npm install -g @electron/asar`
 3. 使用 @electron/asar 打包应用程序： `npx asar pack &lt;app_directory&gt; &lt;output_file&gt;` 
 4. 读取 asar 文件： `npx asar extract &lt;input_file&gt; &lt;output_directory&gt;`
@@ -691,7 +696,7 @@ layouts： 负责使用不同的样式输出日志，即格式化日志</p>
 <img src="http://image.redtea.top//imagejava%E5%BC%80%E5%8F%91_log4j_%E6%97%A5%E5%BF%97%E7%BA%A7%E5%88%AB_20231025145108.png?e=9000000000&amp;token=_pgcTSP3oIupXCcKpdZYLsvKfaaNPV-1PBxNOtDy:KaOOACFFggCxPV_QfAvaqGykYnQ=" alt="image.png" /></p>
 <h3><a id="1-2%E6%97%A5%E5%BF%97%E8%BE%93%E5%87%BA%E4%BD%8D%E7%BD%AE" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>1.2 日志输出位置</h3>
 <p>日志输出的位置是由参数appender决定的，根据不同的参数设定，可以将日志文件自定义输出到控制台、文件中等</p>
-<pre><code class="language-markdown">- 常用Appenders：
+<pre class="line-numbers"><code class="language-markdown">- 常用Appenders：
     - ConsoleAppender  
         将日志输出到控制台
     - FileAppender 
@@ -731,7 +736,7 @@ layouts： 负责使用不同的样式输出日志，即格式化日志</p>
 </li>
 </ul>
 <p>案例使用：</p>
-<pre><code class="language-plain_text">- %m 输出代码中指定的日志信息
+<pre class="line-numbers"><code class="language-plain_text">- %m 输出代码中指定的日志信息
 - %p 输出优先级，及 DEBUG、INFO 等
 - %n 换行符（Windows平台的换行符为 “\n”，Unix 平台为 “\n”）
 - %r 输出自应用启动到输出该 log 信息耗费的毫秒数
@@ -759,7 +764,7 @@ layouts： 负责使用不同的样式输出日志，即格式化日志</p>
 ==优化点：== 两个日志写入内容有重复，<br />
 1、可以在控制层对日志进行整理处理，分别在不同的地方写入不同的日志。<br />
 2、规划重要耗时做debug处理，其他警告、报错信息放到error中去。</p>
-<pre><code class="language-xml">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; ?&gt;  
+<pre class="line-numbers"><code class="language-xml">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; ?&gt;  
 &lt;!DOCTYPE log4j:configuration PUBLIC  
   &quot;-//APACHE//DTD LOG4J 1.2//EN&quot; &quot;http://logging.apache.org/log4j/1.2/apidocs/org/apache/log4j/xml/doc-files/log4j.dtd&quot;&gt;  
 &lt;log4j:configuration xmlns:log4j=&quot;http://jakarta.apache.org/log4j/&quot;&gt;  
@@ -866,7 +871,7 @@ layouts： 负责使用不同的样式输出日志，即格式化日志</p>
 <ol>
 <li>GitHub设置dns解析。打开域名购买商或者代理商的网站，把GitHub的几个地址解析添加上去。</li>
 </ol>
-<pre><code class="language-plain_text">185.199.108.153
+<pre class="line-numbers"><code class="language-plain_text">185.199.108.153
 185.199.109.153
 185.199.110.153
 185.199.111.153

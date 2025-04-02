@@ -38,9 +38,9 @@
       <div style="position: relative;width:100%;"><div style="position: absolute; width:100%;">
         <ul id="main-menu" class="left">
         
-        <li id=""><a target="_self" href="index.html">Home</a></li>
+        <li id=""><a target="_self" href="index.html">首页</a></li>
         
-        <li id=""><a target="_self" href="archives.html">Archives</a></li>
+        <li id=""><a target="_self" href="archives.html">更新活动</a></li>
         
         </ul>
 
@@ -67,9 +67,9 @@
 <aside class="left-off-canvas-menu">
       <ul class="off-canvas-list">
         
-        <li><a target="_self" href="index.html">Home</a></li>
+        <li><a target="_self" href="index.html">首页</a></li>
         
-        <li><a target="_self" href="archives.html">Archives</a></li>
+        <li><a target="_self" href="archives.html">更新活动</a></li>
         
 
     <li><label>Categories</label></li>
@@ -133,7 +133,7 @@ npm版本：10.0.1</p>
 <h2><a id="1%E7%BD%91%E4%B8%8A%E6%95%99%E7%A8%8B" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>1 网上教程</h2>
 <p>app.asar文件是Electron加密打包时的中间产物，electron.exe调用resources文件夹下的app.asar从而实现不用解压缩而直接读取文件内容的高效。</p>
 <p>在网上的一些教程中，对asar文件的解压和打包主要是执行以下命令：</p>
-<pre><code class="language-plain_text">1、安装asar 
+<pre class="line-numbers"><code class="language-plain_text">1、安装asar 
 npm install -g asar
 2、cmd窗口中解压文件
 asar extract app.asar ./app
@@ -142,11 +142,11 @@ asar extract app.asar ./app
 </code></pre>
 <h2><a id="2%E6%8A%A5%E9%94%99%E6%8F%90%E7%A4%BA" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>2 报错提示</h2>
 <p>执行安装命令中，实际会报错以下消息：</p>
-<pre><code class="language-plain_text">npm WARN deprecated asar@3.2.0: Please use @electron/asar moving forward. There is no API change, just a package name change
+<pre class="line-numbers"><code class="language-plain_text">npm WARN deprecated asar@3.2.0: Please use @electron/asar moving forward. There is no API change, just a package name change
 </code></pre>
 <p>原因是在新版本的框架中，已经有包含了asar的支持，不需要在额外下载对应的模块，只需要更更换执行的命令即可。</p>
 <p>根据警告消息所示，官方建议改用 @electron/asar。这是一个针对 Electron 应用程序中的数据和文件管理的模块，它支持读取和打包应用内的文件，可以在命令行中使用。 您可以按照下面的步骤来更新 asar 版本：</p>
-<pre><code class="language-plain_text">1. 卸载旧版 asar： `npm uninstall asar`
+<pre class="line-numbers"><code class="language-plain_text">1. 卸载旧版 asar： `npm uninstall asar`
 2. 安装新版 @electron/asar： `npm install -g @electron/asar`
 3. 使用 @electron/asar 打包应用程序： `npx asar pack &lt;app_directory&gt; &lt;output_file&gt;` 
 4. 读取 asar 文件： `npx asar extract &lt;input_file&gt; &lt;output_directory&gt;`

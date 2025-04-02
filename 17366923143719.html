@@ -38,9 +38,9 @@
       <div style="position: relative;width:100%;"><div style="position: absolute; width:100%;">
         <ul id="main-menu" class="left">
         
-        <li id=""><a target="_self" href="index.html">Home</a></li>
+        <li id=""><a target="_self" href="index.html">首页</a></li>
         
-        <li id=""><a target="_self" href="archives.html">Archives</a></li>
+        <li id=""><a target="_self" href="archives.html">更新活动</a></li>
         
         </ul>
 
@@ -67,9 +67,9 @@
 <aside class="left-off-canvas-menu">
       <ul class="off-canvas-list">
         
-        <li><a target="_self" href="index.html">Home</a></li>
+        <li><a target="_self" href="index.html">首页</a></li>
         
-        <li><a target="_self" href="archives.html">Archives</a></li>
+        <li><a target="_self" href="archives.html">更新活动</a></li>
         
 
     <li><label>Categories</label></li>
@@ -143,7 +143,7 @@ layouts： 负责使用不同的样式输出日志，即格式化日志</p>
 <img src="http://image.redtea.top//imagejava%E5%BC%80%E5%8F%91_log4j_%E6%97%A5%E5%BF%97%E7%BA%A7%E5%88%AB_20231025145108.png?e=9000000000&amp;token=_pgcTSP3oIupXCcKpdZYLsvKfaaNPV-1PBxNOtDy:KaOOACFFggCxPV_QfAvaqGykYnQ=" alt="image.png" /></p>
 <h3><a id="1-2%E6%97%A5%E5%BF%97%E8%BE%93%E5%87%BA%E4%BD%8D%E7%BD%AE" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>1.2 日志输出位置</h3>
 <p>日志输出的位置是由参数appender决定的，根据不同的参数设定，可以将日志文件自定义输出到控制台、文件中等</p>
-<pre><code class="language-markdown">- 常用Appenders：
+<pre class="line-numbers"><code class="language-markdown">- 常用Appenders：
     - ConsoleAppender  
         将日志输出到控制台
     - FileAppender 
@@ -183,7 +183,7 @@ layouts： 负责使用不同的样式输出日志，即格式化日志</p>
 </li>
 </ul>
 <p>案例使用：</p>
-<pre><code class="language-plain_text">- %m 输出代码中指定的日志信息
+<pre class="line-numbers"><code class="language-plain_text">- %m 输出代码中指定的日志信息
 - %p 输出优先级，及 DEBUG、INFO 等
 - %n 换行符（Windows平台的换行符为 “\n”，Unix 平台为 “\n”）
 - %r 输出自应用启动到输出该 log 信息耗费的毫秒数
@@ -211,7 +211,7 @@ layouts： 负责使用不同的样式输出日志，即格式化日志</p>
 ==优化点：== 两个日志写入内容有重复，<br />
 1、可以在控制层对日志进行整理处理，分别在不同的地方写入不同的日志。<br />
 2、规划重要耗时做debug处理，其他警告、报错信息放到error中去。</p>
-<pre><code class="language-xml">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; ?&gt;  
+<pre class="line-numbers"><code class="language-xml">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; ?&gt;  
 &lt;!DOCTYPE log4j:configuration PUBLIC  
   &quot;-//APACHE//DTD LOG4J 1.2//EN&quot; &quot;http://logging.apache.org/log4j/1.2/apidocs/org/apache/log4j/xml/doc-files/log4j.dtd&quot;&gt;  
 &lt;log4j:configuration xmlns:log4j=&quot;http://jakarta.apache.org/log4j/&quot;&gt;  
